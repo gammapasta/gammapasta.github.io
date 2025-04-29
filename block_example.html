@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>디스플레이 인라인과 블록</title>
+    <style>
+        * { /* 초기화 시킴 */
+            margin: 0;
+            padding: 0;
+        }
+        #menu2 {
+            width: 500px; 
+            padding: 10px;
+            margin: 20px 0 0 40px;
+            background-color: beige;
+            border: solid 1px #aaaaaa;
+            text-align: center;   
+        }
+        #menu2 li {
+            display: inline; /* 인라인으로 설정 */
+        }
+
+        a{
+            display: block; /* a태그는 원래 인라인인데 블록으로 바꾸기 블록으로 설정 */
+        }
+
+        .green_box{
+            display: inline-block; /* 인라인 블록으로 설정 */
+            width: 150px; /* 너비 */
+            height: 75px; /* 높이 */
+            margin: 10px;
+            border: solid 1px #3bae47; /* 테두리 */
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./menu.css">
+</head>
+<body>
+    <ul id="menu">
+        <li><a style="display: inline;" href="./index.html">홈</a></li>
+        <li><a style="display: inline;" href="./block_example.html">블록예제(7주)</a></li>
+        <li><a style="display: inline;" href="./book.html">책소개(7주)</a></li>
+        <li><a style="display: inline;" href="./week7index.html">음식점소개(7주)</a></li>
+        <li><a style="display: inline;" href="./week6index.html">식물들(6주)</a></li>
+        <li><a style="display: inline;" href="./week5index.html">크리스마스카드(5주)</a></li>
+        <li><a style="display: inline;" href="./week4index.html">식물원(4주)</a></li>
+        <li><a style="display: inline;" href="./arboretum.html">식물원 안내(4주)</a></li>
+        <li><a style="display: inline;" href="./festival.html">꽃축제(4주)</a></li>
+        <li><a style="display: inline;" href="./join.html">신청하기(4주)</a></li>
+        <li><a style="display: inline;" href="./week3index.html">프로필(3주)</a></li>
+        <li><a style="display: inline;" href="./recipe.html">레시피(3주)</a></li>
+    </ul>
+    <br>
+    <ul id="menu2">
+        <li>회사소개 |</li>
+        <li>제품소개 |</li>
+        <li>공지사항 |</li>
+        <li>업부제휴 |</li>
+        <li>고객센터 |</li>
+    </ul>
+
+    <p>수직 방향 메뉴 a태그는 원래 인라인인데 블록으로 바꾸기</p>
+    <a href="http://naver.com" target="_blank">네이버</a>
+    <a href="http://daum.net" target="_blank">다음</a>
+    <a href="http://google.com" target="_blank">구글</a>
+
+    
+    <br><br>
+    <h2>인라인과 블록</h2>
+    
+    <h3>1. 인라인 요소</h3>
+    <span>텍스트 1</span>
+    <span>텍스트 2</span>
+    <span>텍스트 3</span>
+    <img src="./img/buy.png">
+    <img src="./img/buy.png">
+    <br><br><br>
+    <h3>2. 블록 요소</h3>
+    <p>이것은 단락입니다</p>
+    <div>박스 1</div>
+    <div>박스 2</div>
+
+    <br><br>
+
+    <h2>ex 8.12 인라인 + 블록(display:inline-block)</h2>
+    <div class="green_box">박스 1</div>
+    <div class="green_box">박스 2</div>
+    <div class="green_box">박스 3</div>
+    <div class="green_box">박스 4</div>
+    <div class="green_box">박스 5</div>
+    <div class="green_box">박스 6</div>
+
+
+</body>
+</html>
