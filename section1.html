@@ -96,8 +96,6 @@
         }
 
 
-
-                /* 모바일 반응형 */
         @media screen and (max-width: 900px) {
             
             .leftcolumn,
@@ -112,39 +110,26 @@
                 padding: 15px 30px;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                 z-index: 100;
-
                 display: flex;
-
                 align-items: center;
-
                 box-sizing: border-box;
                 flex-direction: column;
                 padding: 10px 20px;
             }
 
             .topNav h1 {
-                /* h1을 모바일 헤더의 중앙에 배치 */
                 position: static;
-                /* relative/absolute 설정 해제 */
                 margin: 0 auto 10px auto;
-                /* 좌우 마진 auto로 가운데 정렬, 하단에 10px 여백 */
                 text-align: center;
-                /* 텍스트 정렬 */
                 width: 100%;
-                /* 너비 100%로 설정하여 margin:auto가 제대로 작동하도록 함 */
             }
 
 
             .topNav nav ul {
-                /* 데스크탑에서 상속되는 absolute positioning 재정의 */
                 position: static;
-                /* absolute 설정을 해제하여 플렉스 흐름에 따르도록 함 */
                 left: auto;
-                /* 기존 left 값 초기화 */
                 top: auto;
-                /* 기존 top 값 초기화 */
                 transform: none;
-                /* transform 값 초기화 */
                 width: 100%;
                 text-align: center;
             }
@@ -208,15 +193,12 @@
             }
 
             .cardImg {
-                /* width: 100%; (이미 cardImg에 100% 설정되어 있으므로 변경 없음) */
                 height: 250px;
-                /* 모바일에서 이미지 높이 줄이기 */
             }
 
 
             .cardDescription {
                 font-size: 0.9em;
-                /* 모바일에서 텍스트 크기 줄이기 */
                 padding: 0 10px 10px;
             }
 
