@@ -1,0 +1,57 @@
+        footer {
+            margin-top: 100px;
+            padding: 20px 0 0 15px;
+            border-top: solid 1px #000000;
+            color: #777777;
+            width: 100%;
+        }
+        ul{
+            list-style: none;
+        }
+
+        footer #address {
+            float: left;
+        }
+
+        footer #link {
+            float: right;
+        }
+
+        footer #footer_menu {
+            margin-top: 5px;
+        }
+
+        footer #company_info {
+            margin-top: 20px;
+        }
+
+        footer #company_info li {
+            margin-top: 2px;
+        }
+
+        footer #copyright {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #888888;
+        }
+
+        footer #link h3 {
+            font-size: 16px;
+            color: #0e82ac;
+        }
+
+        footer #link select {
+            margin: 5px 0 0 50px;
+            width: 100px;
+            height: 18px;
+            font-size: 11px;
+        }
+
+        footer #icons {
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .clear {
+            clear: both;
+        }

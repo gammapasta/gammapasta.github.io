@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딥스카이 탐험</title>
+    <link rel="stylesheet" href="./gallery.css">
+    <link rel="stylesheet" href="./header.css">
+    <link rel="stylesheet" href="./footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        .main-content {
+            z-index: 10;
+            position: relative;
+            width: 100%;
+            height: auto;
+            margin-top: 70px;
+            background-image: radial-gradient(circle at 50% 20%, #073e62, #0b0b0b);
+            overflow: hidden;
+        }
+
+        .backgroundContainer {
+            width: 100%;
+            height: calc(100vh - 30vh);
+        }
+
+
+        .backgroundContainer img {
+            max-width: 100%;
+            height: auto;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .column {
+            float: left;
+            width: 100%;
+            z-index: 10;
+            position: relative;
+            z-index: 10;
+        }
+
+        .column:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column .card h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin: 0px 0px 20px 0;
+        }
+
+        .column .card h3 {
+            font-size: 1.8em;
+            margin: 5px 0px 5px 0;
+
+        }
+
+        .column .card h4 {
+            margin-top: 10px;
+        }
+
+        .column .card p {
+            color: rgb(120, 120, 120);
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin: 0 20px 40px 20px;
+            border-radius: 25px;
+            box-shadow: 3px 3px 16px 4px rgba(0, 0, 0, 0.16);
+            border: solid 1px rgb(228, 228, 228);
+            overflow: hidden;
+
+        }
+
+        /* 카드 타이틀 */
+        .card .cardTitle {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+
+        .card .cardTitle h2 {
+            color: #355574;
+            font-size: 2.2em;
+            margin: 0;
+        }
+
+        .card .cardContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 25px;
+            align-items: flex-start;
+            justify-content: space-evenly;
+        }
+
+
+        .card .description {
+            margin-top: 15px;
+            padding: 3px 12px 12px 12px;
+            background-color: #f4f4f4;
+            border-radius: 20px;
+        }
+
+
+
+        .infoList {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 50px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .infoList dt {
+            font-weight: bold;
+            color: #555;
+            text-align: right;
+            padding-right: 5px;
+
+        }
+
+        .infoList dd {
+            margin: 0;
+            color: #737373;
+            word-break: break-word;
+
+        }
+
+        .cardDescription {
+            padding-top: 25px;
+            margin-top: 25px;
+            margin-bottom: 50px;
+        }
+
+        .cardDescription p {
+            color: #555;
+            text-align: justify;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+
+
+
+        .cardDeepskyImg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .cardDeepskyImg img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+
+
+        }
+
+
+        .cardInfo,
+        .cardDescription {
+            padding: 0 20px 0 20px;
+        }
+
+
+        .cardInfo h3,
+        .cardDescription h3 {
+            color: #1e79b7;
+            font-size: 1.5em;
+            margin-top: 0;
+
+            padding-bottom: 20px;
+        }
+
+
+
+
+
+
+
+
+
+        #gallery {
+
+            z-index: 10;
+            width: 100%;
+            height: auto;
+            background-color: white;
+            padding-bottom: 20px;
+            border-top-left-radius: 30px 25px;
+            border-top-right-radius: 30px 25px;
+        }
+
+        footer {
+            margin-top: 0px;
+            padding: 20px 0 0 15px;
+            border-top: solid 1px #000000;
+            color: #777777;
+            width: 100%;
+            position: relative;
+            /* z-index를 위해 필요 */
+            z-index: 10;
+            background-color: white;
+            /* 푸터의 배경색을 흰색으로 지정 */
+            height: auto;
+            padding-bottom: 20px;
+            /* 추가: float 된 자식 요소를 포함하도록 overflow 속성 추가 */
+            overflow: hidden;
+            /* 이 속성을 추가하면 float 자식들이 부모 안에 포함됩니다. */
+        }
+
+        /* 모바일 반응형 */
+        @media screen and (max-width: 900px) {
+            .backgroundContainer {
+                width: 100%;
+                height: calc(100vh - 70vh);
+            }
+
+
+            .backgroundContainer img {
+                max-width: 100%;
+                height: auto;
+                position: relative;
+                z-index: 1;
+                top: 30vh;
+                left: 0;
+                width: 100%;
+                object-fit: cover;
+            }
+
+
+
+            .topNav {
+                position: absolute;
+                background-color: white;
+                padding: 15px 30px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+
+                display: flex;
+
+                align-items: center;
+
+                box-sizing: border-box;
+                flex-direction: column;
+                padding: 10px 20px;
+            }
+
+            .topNav h1 {
+                position: static;
+                margin: 0 auto 10px auto;
+                text-align: center;
+                width: 100%;
+            }
+
+
+            .topNav nav ul {
+                position: static;
+                left: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                text-align: center;
+            }
+
+
+
+            .topNav nav ul li {
+                margin: 0 5px;
+                display: block;
+            }
+
+            .topNav nav ul li a {
+                display: block;
+                text-align: center;
+                padding: 5px 10px;
+
+            }
+
+
+            .main-content {
+
+                height: auto;
+                margin-top: 220px;
+            }
+
+            .column {
+                padding: 0 20px 30px 20px;
+            }
+
+            .card {
+                width: 100%;
+                height: auto;
+                margin: 0 auto 30px auto;
+                padding: 15px;
+            }
+
+            .cardContainer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cardDeepskyImg {
+                flex: none;
+
+                margin-bottom: 20px;
+            }
+
+            .cardDeepskyImg img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                /* 이미지 비율 유지 */
+            }
+
+            .cardInfo,
+            .cardDescription {
+                width: 100%;
+                padding: 0 10px 0 10px;
+            }
+
+            .infoList {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 10px 10px;
+                margin: 0;
+                padding: 0;
+            }
+
+            .infoList dt {
+                text-align: left;
+            }
+
+
+
+
+            #gallery h1 {
+                text-align: center;
+                margin: 60px 0 20px 0;
+            }
+
+            #galleryMainImage {
+                padding: 0 24px 0 24px;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                box-sizing: border-box;
+            }
+
+            #thumbnail ul img {
+                width: 50px;
+                height: 50px;
+
+            }
+
+            #gallery {
+                width: 100%;
+                height: auto;
+                background-color: white;
+                padding-bottom: 20px;
+                border-top-right-radius: 30px;
+                border-top-left-radius: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topNav">
+        <h1><a href="./index.html"><img src="./img/밤하늘여행로고.png" alt=""밤하늘여행로고></a></h1>
+        <div id="nav">
+            <nav>
+                <ul>
+                    <li><a href="./section1.html">오늘의 밤하늘</a></li>
+                    <li><a href="./section2.html">행성과 함께</a></li>
+                    <li><a href="./section3.html">딥스카이 탐험</a></li>
+                    <li><a href="./section4.html">관측 길라잡이</a></li>
+                    <li><a href="./section5.html">갤러리</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <div class="backgroundContainer">
+        <img src="./img/장미성운.jfif" alt=""></li>
+    </div>
+
+    <div class="clear"></div>
+    <main class="main-content">
+        <div class="column">
+
+            <div class="card">
+                <div class="cardTitle">
+                    <h2>딥스카이 탐험</h2>
+                </div>
+                <div class="cardDescription">
+                    <h3>딥스카이란?</h3>
+                    <p>
+                        <b>딥스카이(Deep Sky)</b>는 우리 태양계 너머, 망원경으로 관측할 수 있는 성운, 성단, 은하처럼 지구에서 멀리 떨어진 천체들을 일컫는 말입니다.
+                        이들은 지구에서 매우 멀리 떨어져 있고, 자체 발광량이 약하거나 빛이 희미해 맨눈으로는 쉽게 관측하기 어렵습니다. 그래서 ‘깊은 우주’ 또는 ‘심원 천체’라고도 불립니다.
+                        딥스카이 천체는 육안이나 쌍안경으로는 보기 힘들지만, 우주의 신비와 아름다움을 간직하고 있어 많은 이들이 관측과 촬영을 즐깁니다.
+                        성운이나 은하의 구조와 색감을 포착하려면 장시간 노출 촬영이 필요하며, 대표적인 딥스카이 대상으로는 오리온 성운, 안드로메다 은하, 플레이아데스 성단 등이 있습니다. 이들은
+                        각기 다른 형태와 빛깔로 밤하늘을 장식합니다.
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="cardTitle">
+                    <h2>오리온 성운 (m42)</h2>
+                </div>
+                <div class="cardContainer">
+                    <div class="cardDeepskyImg">
+                        <img src="./img/오리온성운.jfif" alt="화성 이미지">
+                    </div>
+
+                </div>
+                <div class="cardDescription">
+                    <h3>오리온 성운 (Orion Nebula)</h3>
+                    <p><b>겉보기 등급:</b> 약 4.0등급</p>
+                    <p><b>물리적 성질:</b> 산광성운(방출 성운), 별 형성 지역, 약 1,344 광년 거리, 약 24 광년 크기</p>
+                    <p><b>적경:</b> 05h 35m</p>
+                    <p><b>적위:</b> -05° 27'</p>
+                    <h4>개요</h4>
+                    <p>밤하늘에서 가장 밝고 유명한 성운 중 하나로, 맨눈으로도 희미하게 볼 수 있는 몇 안 되는 성운입니다. 거대한 별 형성 지역으로, 수많은 새로운 별들이 탄생하고 있는 우주의
+                        요람입니다.</p>
+                    <h4>어떻게 찾을까?</h4>
+                    <p>오리온자리의 허리띠(삼태성) 아래에 있는 '칼자루' 부분에서 쉽게 찾을 수 있습니다. 어두운 밤하늘에서는 맨눈으로도 작은 구름처럼 보이며, 쌍안경이나 소형 망원경으로도 놀라운
+                        모습을 보여줍니다.</p>
+                    <h4>관측 난이도</h4>
+                    <p>맨눈으로도 희미하게 보이며, 쌍안경이나 소형 망원경으로도 놀라운 모습을 보여줍니다. 아마추어 천문학자들에게 필수 관측 대상이며, 초보자도 쉽게 찾고 감상할 수 있습니다.
+                        대구경 망원경에서는 성운 내부의 복잡한 구조와 '트라페지움 성단'을 선명하게 볼 수 있습니다.</p>
+                    <h4>특징</h4>
+                    <p>성운의 중심에는 '트라페지움 성단(Trapezium Cluster)'이라고 불리는 젊고 뜨거운 별 네 개가 있는데, 이 별들이 내뿜는 강력한 자외선이 주변의 가스를 이온화시켜
+                        성운이 빛나게 합니다. 성운 내에는 가스와 먼지가 압축되어 새로운 별들이 계속해서 태어나고 있으며, 이는 별의 탄생 과정을 연구하는 데 중요한 역할을 합니다.</p>
+                </div>
+            </div>
+
+
+
+
+            <div class="card">
+                <div class="cardTitle">
+                    <h2>장미 성운 (NGC 2237)</h2>
+                </div>
+                <div class="cardContainer">
+                    <div class="cardDeepskyImg">
+                        <img src="./img/장미성운.jfif" alt="장미성운">
+                    </div>
+                </div>
+                <div class="cardDescription">
+                    <h3>장미 성운 (Rosette Nebula)</h3>
+                    <p><b>겉보기 등급:</b> 성운 자체는 약 6.0등급 (중심 성단 NGC 2244는 약 4.8등급)</p>
+                    <p><b>물리적 성질:</b> 발광 성운, 별 형성 지역, 약 5,200 광년 거리, 약 130 광년 크기</p>
+                    <p><b>적경:</b> 06h 33m</p>
+                    <p><b>적위:</b> +05° 02'</p>
+                    <h4>개요</h4>
+                    <p>그 이름처럼 활짝 핀 장미꽃을 닮은 아름다운 성운입니다. 중심에 있는 젊은 별들이 내뿜는 복사 에너지로 인해 주변의 수소 가스가 이온화되어 붉게 빛나는 발광 성운입니다.
+                        겨울철 별자리인 외뿔소자리에 위치하고 있습니다.</p>
+                    <h4>어떻게 찾을까?</h4>
+                    <p>외뿔소자리에 위치하여, 오리온자리의 북동쪽, 쌍둥이자리와 작은개자리 사이에 있습니다. 주변에 밝은 별이 없어 맨눈으로 찾기는 다소 어렵습니다. 작은개자리의 프로키온에서
+                        북동쪽으로 약 10도 정도 떨어진 곳에 있습니다. 넓은 시야의 쌍안경이나 소형 망원경으로 희미한 구름처럼 보이기 시작합니다.</p>
+                    <h4>관측 난이도</h4>
+                    <p>맨눈으로는 거의 불가능하며, 쌍안경이나 소형 망원경으로는 매우 희미하고 흐릿하게 보입니다. 대구경 망원경과 UHC 또는 OIII 성운 필터를 사용해야 성운의 윤곽을 식별할 수
+                        있습니다. 그 아름다운 장미 형태는 주로 장시간 노출의 천체 사진에서 선명하게 드러납니다. 초보자보다는 중급자 이상의 관측자에게 추천됩니다.</p>
+                    <h4>특징</h4>
+                    <p>성운의 중심에는 'NGC 2244'라는 젊은 별들의 산개성단이 위치하고 있습니다. 이 성단의 별들은 형성된 지 불과 몇 백만 년밖에 되지 않았으며, 이 별들이 내뿜는 강력한
+                        항성풍과 자외선이 주변 가스를 밀어내어 성운의 중앙에 공동(空洞)을 만들고 장미꽃과 같은 독특한 형태를 만들어냅니다.</p>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="card">
+                <div class="cardTitle">
+                    <h2>헤르클레스 구상성단 (M13)</h2>
+                </div>
+                <div class="cardContainer">
+                    <div class="cardDeepskyImg">
+                        <img src="./img/m13.png" alt="m13">
+                    </div>
+
+                </div>
+                <div class="cardDescription">
+                    <h3>헤르클레스 구상성단 (Hercules Globular Cluster)</h3>
+                    <p><b>겉보기 등급:</b> 약 5.8등급</p>
+                    <p><b>물리적 성질:</b> 구상성단, 약 25,000 광년 거리, 약 145 광년 크기, 수십만 개의 별로 구성</p>
+                    <p><b>적경:</b> 16h 41m</p>
+                    <p><b>적위:</b> +36° 28'</p>
+                    <h4>개요</h4>
+                    <p>북반구 하늘에서 가장 크고 밝은 구상성단 중 하나로, 수십만 개의 별들이 중력으로 뭉쳐 공 모양을 이루고 있습니다. 우리 은하의 헤일로에 속하며, 매우 오래된 별들로 구성되어
+                        있어 초기 우주의 역사를 연구하는 데 중요한 단서를 제공합니다.</p>
+                    <h4>어떻게 찾을까?</h4>
+                    <p>여름철 별자리인 헤르클레스자리의 서쪽 가장자리에 위치합니다. '키스톤(Keystone)'이라고 불리는 헤르클레스자리의 사다리꼴 모양의 별자리 안에서 찾을 수 있습니다. 밝은
+                        별인 직녀성(베가)과 아크투루스 사이를 잇는 선 중간 정도에 위치하여 찾기 쉽습니다.</p>
+                    <h4>관측 난이도</h4>
+                    <p>어두운 밤하늘에서는 맨눈으로도 희미한 성운처럼 보일 수 있습니다. 쌍안경으로는 흐릿한 구슬 모양으로 보이며, 소형 망원경(6인치 이상)으로는 성단의 가장자리 별들이 분리되기
+                        시작합니다. 대구경 망원경으로는 수십만 개의 별들이 촘촘히 박힌 장엄한 모습을 감상할 수 있습니다. 초보자도 쉽게 찾을 수 있는 인기 있는 관측 대상입니다.</p>
+                    <h4>특징</h4>
+                    <p>M13은 우리 은하에서 가장 밀집된 별들 중 하나로, 성단의 중심부에서는 별들이 태양에서 가장 가까운 별인 프록시마 센타우리보다 수백 배 더 가까이 붙어 있습니다. 약
+                        120억 년이라는 매우 오래된 나이를 가지고 있어, 우리 은하 형성 초기에 만들어진 것으로 추정됩니다. 구상성단 중에서 드물게 성단 중심부에 푸른 거성(블루 스트래글러)이
+                        많이 발견되어 연구 가치가 높습니다.</p>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+        <div class="clear"></div>
+
+        <section>
+            <div id="gallery">
+                <h1>이미지 갤러리</h1>
+                <img id="galleryMainImage" src="./img/9.webp" alt="메인 이미지">
+                <div id="thumbnail">
+                    <img src="./img/left.png" id="move_left" alt="왼쪽 화살표">
+                    <ul>
+                        <li><img src="./img/장미성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/9.webp" alt="썸네일 1"></li>
+                        <li><img src="./img/m27.jfif" alt="썸네일 2"></li>
+                        <li><img src="./img/장미성운2.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/장미성운3.png" alt="썸네일 8"></li>
+                        <li><img src="./img/버블성운1.jfif" alt="썸네일 3"></li>
+                        <li><img src="./img/북아메리카성운.jfif" alt="썸네일 4"></li>
+                        <li><img src="./img/영혼 성운.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/베일성운.png" alt="썸네일 5"></li>
+                        <li><img src="./img/베일성운2.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/고리성운.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/돌고래성운.jfif" alt="썸네일 6"></li>
+                        <li><img src="./img/m13.png" alt="썸네일 7"></li>
+                        <li><img src="./img/m104.png" alt="썸네일 8"></li>
+                        <li><img src="./img/ngc7293.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/마귀할멈성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/장미성운4.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/코끼리성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/팩맨성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/하트성운.jfif" alt="썸네일 8"></li>
+
+                    </ul>
+                    <img src="./img/right.png" id="move_right" alt="오른쪽 화살표">
+                </div>
+            </div>
+    </main>
+
+    <div class="clear"></div>
+
+
+    <footer>
+        <article id="address">
+            <ul id="footer_menu">
+                <li>개인정보 취급 방침 | 이용안내 | 이메일 무단 수집 거부</li>
+                <li>상호 : 밤하늘 여행 | 대표 : gammapasta | 등록번호 : 123-45-67890</li>
+            </ul>
+            <ul id="company_info">
+                <li>밤하늘 여행 유한회사</li>
+                <li>대표이사: gammapasta</li>
+                <li>주소: 태양계 지구 위성 A23-s521</li>
+                <li>이미지 출처: <a
+                        href="https://github.com/gammapasta/gammapasta.github.io/blob/main/image_source.txt">link</a>
+                </li>
+                <li id="copyright">
+                    <p>Copyright © <span id="currentYear"></span> gammapasta. Licensed under the <a
+                            href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT
+                            License</a>.</p>
+                </li>
+                <li></li>
+            </ul>
+        </article>
+        <article id="link">
+            <h3>고객센터 159-9912-9-3332</h3>
+            <select>
+                <option>네이버</option>
+                <option>구글</option>
+            </select>
+            <div id="icons">
+                <img src="./img/facebook.png">
+                <img src="./img/insta.png">
+                <img src="./img/t.png">
+            </div>
+        </article>
+    </footer>
+
+
+
+
+</body>
+
+</html>

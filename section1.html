@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 밤하늘</title>
+    <link rel="stylesheet" href="./gallery.css">
+    <link rel="stylesheet" href="./header.css">
+    <link rel="stylesheet" href="./footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main-content {
+            width: 100%;
+            height: auto;
+            margin-top: 70px;
+        }
+
+        .row {
+            background-color: white;
+        }
+
+        .leftcolumn {
+            float: left;
+            width: 65%;
+
+        }
+
+        .rightcolumn {
+            float: left;
+            width: 35%;
+
+            padding-left: 25px;
+        }
+
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 25px;
+            box-shadow: 3px 3px 16px 4px rgba(0, 0, 0, 0.16);
+            border: solid 1px rgb(228, 228, 228);
+
+        }
+
+        .card .description {
+            margin-top: 15px;
+            padding: 3px 12px 12px 12px;
+            background-color: #f4f4f4;
+            border-radius: 20px;
+        }
+
+        #cardMainImg img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .row .leftcolumn .card h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin: 0px 0px 20px 0;
+        }
+
+        .row .leftcolumn .card h3 {
+            font-size: 1.8em;
+            margin: 5px 0px 5px 0;
+
+        }
+
+        .row .leftcolumn .card h4 {
+            margin-top: 10px;
+        }
+
+        .row .leftcolumn .card p {
+            color: rgb(120, 120, 120);
+        }
+
+        .weatherDisplay {
+            padding: 5px 10px 10px 20px;
+        }
+
+        .weatherDisplay input {
+            margin-bottom: 10px;
+        }
+
+
+
+                /* 모바일 반응형 */
+        @media screen and (max-width: 900px) {
+            
+            .leftcolumn,
+            .rightcolumn {
+                width: 100%;
+                padding: 0;
+            }
+            
+            .topNav {
+                position: absolute;
+                background-color: white;
+                padding: 15px 30px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+
+                display: flex;
+
+                align-items: center;
+
+                box-sizing: border-box;
+                flex-direction: column;
+                padding: 10px 20px;
+            }
+
+            .topNav h1 {
+                /* h1을 모바일 헤더의 중앙에 배치 */
+                position: static;
+                /* relative/absolute 설정 해제 */
+                margin: 0 auto 10px auto;
+                /* 좌우 마진 auto로 가운데 정렬, 하단에 10px 여백 */
+                text-align: center;
+                /* 텍스트 정렬 */
+                width: 100%;
+                /* 너비 100%로 설정하여 margin:auto가 제대로 작동하도록 함 */
+            }
+
+
+            .topNav nav ul {
+                /* 데스크탑에서 상속되는 absolute positioning 재정의 */
+                position: static;
+                /* absolute 설정을 해제하여 플렉스 흐름에 따르도록 함 */
+                left: auto;
+                /* 기존 left 값 초기화 */
+                top: auto;
+                /* 기존 top 값 초기화 */
+                transform: none;
+                /* transform 값 초기화 */
+                width: 100%;
+                text-align: center;
+            }
+
+
+
+            .topNav nav ul li {
+                margin: 0 5px;
+                display: block;
+            }
+
+            .topNav nav ul li a {
+                display: block;
+                text-align: center;
+                padding: 5px 10px;
+
+            }
+
+
+            .main-content {
+                padding: 30px 20px;
+                height: auto;
+                margin-top: 220px;
+            }
+
+
+
+            #mainImg {
+                width: 100%;
+                height: 870px;
+
+
+                display: block;
+            }
+
+            #mainImg ul {
+                padding-top: 20px;
+                list-style: none;
+                display: block;
+
+
+            }
+
+            #mainImg ul li {
+                margin: 0 10px;
+                text-align: center;
+
+            }
+
+            #mainImg ul li img {
+
+                display: inline-block;
+
+            }
+
+            .card {
+                width: 100%;
+                height: auto;
+                margin: 15px auto;
+                padding: 15px;
+            }
+
+            .cardImg {
+                /* width: 100%; (이미 cardImg에 100% 설정되어 있으므로 변경 없음) */
+                height: 250px;
+                /* 모바일에서 이미지 높이 줄이기 */
+            }
+
+
+            .cardDescription {
+                font-size: 0.9em;
+                /* 모바일에서 텍스트 크기 줄이기 */
+                padding: 0 10px 10px;
+            }
+
+            #gallery h1 {
+                text-align: center;
+                margin: 60px 0 20px 0;
+            }
+
+            #galleryMainImage {
+                padding: 0 24px 0 24px;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                box-sizing: border-box;
+            }
+
+            #thumbnail ul img {
+                width: 50px;
+                height: 50px;
+
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header class="topNav">
+        <h1><a href="./index.html"><img src="./img/밤하늘여행로고.png" alt=""밤하늘여행로고></a></h1>
+        <div id="nav">
+            <nav>
+                <ul>
+                    <li><a href="./section1.html">오늘의 밤하늘</a></li>
+                    <li><a href="./section2.html">행성과 함께</a></li>
+                    <li><a href="./section3.html">딥스카이 탐험</a></li>
+                    <li><a href="./section4.html">관측 길라잡이</a></li>
+                    <li><a href="./section5.html">갤러리</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="clear"></div>
+    <main class="main-content">
+
+        <div class="row">
+            <div class="leftcolumn">
+                <div class="card">
+                    <h2>오늘의 추천 별자리 - 거문고자리</h2>
+                    <div id="cardMainImg">
+                        <img src="./img/lyra-constellation.jpg">
+                    </div>
+                    <div class="description">
+                        <h3>거문고자리 (Lyra)</h3>
+                        <p><b>겉보기 등급:</b>&nbsp;0.02등급 (베가, 5번째로 밝은 별)</p>
+                        <h4>어떻게 찾을까?</h4>
+                        <p>여름철 밤하늘, 9시 이후 동쪽/남동쪽 하늘에서 가장 밝은 별이 베가이다. 베가를 중심으로 작은 직사각형 또는 마름모꼴 형태를 이루는 별들로 구성된다</p>
+                        <h4>관측 난이도</h4>
+                        <p>맨눈으로 쉽게 볼 수 있으며, 초보자도 별자리 베가를 기준으로 쉽게 찾을 수 있다.</p>
+                        <h4>특징</h4>
+                        <p>그리스 신화에서 음악가 오르페우스가 사용하던 리라(수금)를 상징하며, 여름철 대삼각형의 꼭짓점이자 대표적인 별자리이다.</p>
+                    </div>
+
+
+                </div>
+                <div class="card">
+                    <h2>오늘의 추천 딥스카이 - 고리 성운 (M57)</h2>
+                    <div id="cardMainImg">
+                        <img src="./img/고리성운.jfif">
+                    </div>
+                    <div class="description">
+                        <h3>고리 성운 (Ring Nebula)</h3>
+                        <p><b>겉보기 등급:</b>&nbsp;약 8.8등급</p>
+                        <h4>어떻게 찾을까?</h4>
+                        <p>거문고자리의 β별(셸리아크)과 γ별(술라파트) 사이를 망원경으로 천천히 이동하면 찾을 수 있다. 밝은 별 근처이기 때문에 위치만 알면 어렵지 않다.</p>
+                        <h4>관측 난이도</h4>
+                        <p>소형 망원경 이상에서 관측 가능하며, 천체사진에서는 선명한 도넛 형태가 나타난다. 초보자도 망원경 사용법에 익숙하다면 충분히 도전할 수 있다.</p>
+                        <h4>특징</h4>
+                        <p>태양과 비슷한 별이 생의 마지막에 외곽을 날려 보내며 형성한 행성상 성운이다. 중심에는 백색왜성이 남아 있으며, 고리처럼 보이는 형태가 인상적이다.</p>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="rightcolumn">
+                <div class="card">
+                    <div class="weatherDisplay">
+                        <h2>현재 정보</h2>
+                        <input type="button" id="weatherButton" value="현재 정보 업데이트">
+                        <div>현재 기온:&nbsp;&nbsp;&nbsp;<span id="tempC">버튼을 클릭하세요!</span></div>
+                        <div>날씨:&nbsp;&nbsp;&nbsp;<span id="weatherDescription">버튼을 클릭하세요!</span></div>
+                        <div>구름량:&nbsp;&nbsp;&nbsp;<span id="cloudiness">버튼을 클릭하세요!</span></div>
+                        <div>습도:&nbsp;&nbsp;&nbsp;<span id="humidity">버튼을 클릭하세요!</span></div>
+                        <div>바람:&nbsp;&nbsp;&nbsp;<span id="windSpeed">버튼을 클릭하세요!</span></div>
+                        <div>가시거리:&nbsp;&nbsp;&nbsp;<span id="visibilityKm">버튼을 클릭하세요!</span></div>
+                        <div>1시간 강수량:&nbsp;&nbsp;&nbsp;<span id="rain1h">버튼을 클릭하세요!</span></div>
+                        <div>일출:&nbsp;&nbsp;&nbsp;<span id="sunrise">버튼을 클릭하세요!</span></div>
+                        <div>일몰:&nbsp;&nbsp;&nbsp;<span id="sunset">버튼을 클릭하세요!</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
+
+        <section>
+            <div id="gallery">
+                <h1>이미지 갤러리</h1>
+                <img id="galleryMainImage" src="./img/9.webp" alt="메인 이미지">
+                <div id="thumbnail">
+                    <img src="./img/left.png" id="move_left" alt="왼쪽 화살표">
+                    <ul>
+                        <li><img src="./img/장미성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/9.webp" alt="썸네일 1"></li>
+                        <li><img src="./img/m27.jfif" alt="썸네일 2"></li>
+                        <li><img src="./img/장미성운2.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/장미성운3.png" alt="썸네일 8"></li>
+                        <li><img src="./img/버블성운1.jfif" alt="썸네일 3"></li>
+                        <li><img src="./img/북아메리카성운.jfif" alt="썸네일 4"></li>
+                        <li><img src="./img/영혼 성운.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/베일성운.png" alt="썸네일 5"></li>
+                        <li><img src="./img/베일성운2.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/고리성운.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/돌고래성운.jfif" alt="썸네일 6"></li>
+                        <li><img src="./img/m13.png" alt="썸네일 7"></li>
+                        <li><img src="./img/m104.png" alt="썸네일 8"></li>
+                        <li><img src="./img/ngc7293.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/마귀할멈성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/장미성운4.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/코끼리성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/팩맨성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/하트성운.jfif" alt="썸네일 8"></li>
+
+                    </ul>
+                    <img src="./img/right.png" id="move_right" alt="오른쪽 화살표">
+                </div>
+            </div>
+    </main>
+
+    <footer>
+        <article id="address">
+            <ul id="footer_menu">
+                <li>개인정보 취급 방침 | 이용안내 | 이메일 무단 수집 거부</li>
+                <li>상호 : 밤하늘 여행 | 대표 : gammapasta | 등록번호 : 123-45-67890</li>
+            </ul>
+            <ul id="company_info">
+                <li>밤하늘 여행 유한회사</li>
+                <li>대표이사: gammapasta</li>
+                <li>주소: 태양계 지구 위성 A23-s521</li>
+                <li>이미지 출처: <a
+                        href="https://github.com/gammapasta/gammapasta.github.io/blob/main/image_source.txt">link</a>
+                </li>
+                <li id="copyright">
+                    <p>Copyright © <span id="currentYear"></span> gammapasta. Licensed under the <a
+                            href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT
+                            License</a>.</p>
+                </li>
+                <li></li>
+            </ul>
+        </article>
+        <article id="link">
+            <h3>고객센터 159-9912-9-3332</h3>
+            <select>
+                <option>네이버</option>
+                <option>구글</option>
+            </select>
+            <div id="icons">
+                <img src="./img/facebook.png">
+                <img src="./img/insta.png">
+                <img src="./img/t.png">
+            </div>
+        </article>
+    </footer>
+    <div class="clear"></div>
+
+    <script>
+        const lat = 37.5;
+        const lon = 126.92;
+        const APIKey = "0952033224f9ff288c51e18bc55e96ab";
+
+        const btn = document.querySelector("#weatherButton");
+        const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+
+
+        const tempC = document.getElementById('tempC');
+        const weatherDescription = document.getElementById("weatherDescription");
+        const cloudiness = document.getElementById("cloudiness");
+        const humidity = document.getElementById("humidity");
+        const windSpeed = document.getElementById("windSpeed");
+        const visibilityKm = document.getElementById("visibilityKm");
+        const rain1h = document.getElementById("rain1h");
+        const sunrise = document.getElementById("sunrise");
+        const sunset = document.getElementById("sunset");
+
+
+        let kelvinToCelsius = (k) => (k - 273.15).toFixed(1);
+
+
+
+
+
+        async function getWeather(url) {
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const newTempC = kelvinToCelsius(data.main.temp);
+                const newWeatherDescription = data.weather[0].description;
+                const newCloudiness = data.clouds.all;
+                const newHumidity = data.main.humidity;
+                const newWindSpeed = data.wind.speed.toFixed(1);
+                const newVisibilityKm = (data.visibility / 1000).toFixed(0);
+                const newRain1h = data.rain ? data.rain['1h'] : 0;
+                const newSunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+                const newSunset = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+
+
+                tempC.innerText = `${newTempC}°C`;
+                weatherDescription.innerText = `${newWeatherDescription}`;
+                cloudiness.innerText = `${newCloudiness}%`;
+                humidity.innerText = `${newHumidity}%`;
+                windSpeed.innerText = `${newWindSpeed} m/s`;
+                visibilityKm.innerText = `${newVisibilityKm} km`;
+                rain1h.innerText = `${newRain1h} mm`;
+                sunrise.innerText = `${newSunrise}`;
+                sunset.innerText = `${newSunset}`;
+
+
+            } catch (e) {
+                console.log(e);
+
+            }
+        }
+
+
+        btn.addEventListener("click", () => {
+            getWeather(weatherApi);
+
+        });
+    </script>
+
+</body>
+
+</html>

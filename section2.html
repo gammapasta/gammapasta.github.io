@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>행성과 함께</title>
+    <link rel="stylesheet" href="./gallery.css">
+    <link rel="stylesheet" href="./header.css">
+    <link rel="stylesheet" href="./footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main-content {
+            width: 100%;
+            height: auto;
+            margin-top: 70px;
+
+            background-image: radial-gradient(circle at 50% 45%, #073e62, #0b0b0b);
+        }
+
+
+        .leftcolumn {
+            float: left;
+            width: 100%;
+
+        }
+
+
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 25px;
+            box-shadow: 3px 3px 16px 4px rgba(0, 0, 0, 0.16);
+            border: solid 1px rgb(228, 228, 228);
+            overflow: hidden;
+
+        }
+
+        .card .description {
+            margin-top: 15px;
+            padding: 3px 12px 12px 12px;
+            background-color: #f4f4f4;
+            border-radius: 20px;
+        }
+
+        .cardTitle {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .cardTitle h2 {
+            color: #355574;
+            font-size: 2.2em;
+            margin: 0;
+        }
+
+        .cardContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 25px;
+            align-items: flex-start;
+            justify-content: space-evenly;
+        }
+
+        .planetImg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: rgb(218, 218, 218);
+            border-radius: 300px;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .planetImg img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .planetImg img:hover {
+            transform: scale(1.05);
+        }
+
+        .cardPlanetInfo,
+        .cardPlanetDescription {
+            padding: 0 20px 0 20px;
+        }
+
+
+        .cardPlanetInfo h3,
+        .cardPlanetDescription h3 {
+            color: #1e79b7;
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-left: 4px solid #16537b;
+            padding-left: 10px;
+        }
+
+
+        .infoList {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 50px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .infoList dt {
+            font-weight: bold;
+            color: #555;
+            text-align: right;
+            padding-right: 5px;
+
+        }
+
+        .infoList dd {
+            margin: 0;
+            color: #737373;
+            word-break: break-word;
+
+        }
+
+        .cardPlanetDescription {
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+            margin-top: 25px;
+            margin-bottom: 50px;
+        }
+
+        .cardPlanetDescription p {
+            color: #555;
+            text-align: justify;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .row .leftcolumn .card h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin: 0px 0px 20px 0;
+        }
+
+        .row .leftcolumn .card h3 {
+            font-size: 1.8em;
+            margin: 5px 0px 5px 0;
+
+        }
+
+        .row .leftcolumn .card h4 {
+            margin-top: 10px;
+        }
+
+        .row .leftcolumn .card p {
+            color: rgb(120, 120, 120);
+        }
+
+        .weatherDisplay {
+            padding: 5px 10px 10px 20px;
+        }
+
+        .weatherDisplay input {
+            margin-bottom: 10px;
+        }
+
+
+        .planetsContainer {
+
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .planetsContainer ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .planetsContainer ul li {
+            margin: 0 10px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .planetsContainer ul li a img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+
+        .planetsContainer ul li a img:hover {
+            transform: scale(1.05);
+        }
+
+
+
+        #gallery {
+            width: 100%;
+            height: auto;
+            background-color: white;
+            padding-bottom: 20px;
+            border-top-left-radius: 30px 25px;
+            border-top-right-radius: 30px 25px;
+        }
+
+        /* 모바일 반응형 */
+        @media screen and (max-width: 900px) {
+            .planetsContainer ul {
+                list-style: none;
+                display: block;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .planetsContainer ul li {
+                margin: 0;
+                flex-grow: 1;
+                flex-shrink: 1;
+                flex-basis: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .planetsContainer ul li a img {
+                max-width: 100%;
+                padding: 20px 0;
+                width: 200px;
+                height: auto;
+                display: block;
+            }
+
+
+
+
+            .leftcolumn,
+            .rightcolumn {
+                width: 100%;
+                padding: 0;
+            }
+
+            .topNav {
+                position: absolute;
+                background-color: white;
+                padding: 15px 30px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+
+                display: flex;
+
+                align-items: center;
+
+                box-sizing: border-box;
+                flex-direction: column;
+                padding: 10px 20px;
+            }
+
+            .topNav h1 {
+                position: static;
+                margin: 0 auto 10px auto;
+                text-align: center;
+                width: 100%;
+            }
+
+
+            .topNav nav ul {
+                position: static;
+                left: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                text-align: center;
+            }
+
+
+
+            .topNav nav ul li {
+                margin: 0 5px;
+                display: block;
+            }
+
+            .topNav nav ul li a {
+                display: block;
+                text-align: center;
+                padding: 5px 10px;
+
+            }
+
+
+            .main-content {
+                padding: 30px 20px;
+                height: auto;
+                margin-top: 220px;
+            }
+
+
+
+            .card {
+                width: 100%;
+                height: auto;
+                margin: 15px auto;
+                padding: 15px;
+            }
+
+            .cardContainer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .planetImg {
+                flex: none;
+                /* 고정 너비 해제 */
+                width: 180px;
+                /* 이미지 너비 조정 */
+                height: 180px;
+                margin-bottom: 20px;
+            }
+
+            .planetImg img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                /* 이미지 비율 유지 */
+            }
+
+            .cardPlanetInfo,
+            .cardPlanetDescription {
+                width: 100%;
+                padding: 0 10px 0 10px;
+            }
+
+            .infoList {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 10px 10px;
+                margin: 0;
+                padding: 0;
+            }
+
+            .infoList dt {
+                text-align: left;
+            }
+
+
+
+
+            #gallery h1 {
+                text-align: center;
+                margin: 60px 0 20px 0;
+            }
+
+            #galleryMainImage {
+                padding: 0 24px 0 24px;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                box-sizing: border-box;
+            }
+
+            #thumbnail ul img {
+                width: 50px;
+                height: 50px;
+
+            }
+
+            #gallery {
+                width: 100%;
+                height: auto;
+                background-color: white;
+                padding-bottom: 20px;
+                border-radius: 30px;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topNav">
+        <h1><a href="./index.html"><img src="./img/밤하늘여행로고.png" alt=""밤하늘여행로고></a></h1>
+        <div id="nav">
+            <nav>
+                <ul>
+                    <li><a href="./section1.html">오늘의 밤하늘</a></li>
+                    <li><a href="./section2.html">행성과 함께</a></li>
+                    <li><a href="./section3.html">딥스카이 탐험</a></li>
+                    <li><a href="./section4.html">관측 길라잡이</a></li>
+                    <li><a href="./section5.html">갤러리</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="clear"></div>
+    <main class="main-content">
+        <div class="planetsContainer">
+            <ul>
+                <li><a href="#section1"><img src="./img/mar투명.png" alt=""></a></li>
+                <li><a href="#section2"><img src="./img/moon투명.png" alt=""></a></li>
+                <li><a href="#section3"><img src="./img/jupiter투명.png" alt=""></a></li>
+            </ul>
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="leftcolumn">
+                <div id="section1"><br></div>
+
+                <div class="card">
+                    <div class="cardTitle">
+                        <h2>화성 (Mars)</h2>
+                    </div>
+                    <div class="cardContainer">
+                        <div class="planetImg">
+                            <img src="./img/mar투명.png" alt="화성 이미지">
+                        </div>
+                        <div class="cardPlanetInfo">
+                            <h3>상세 정보</h3>
+                            <dl class="infoList">
+                                <dt>이름</dt>
+                                <dd>화성</dd>
+                                <dt>적도 지름</dt>
+                                <dd>6,792 km</dd>
+                                <dt>둘레 (적도 기준)</dt>
+                                <dd>21,339 km</dd>
+                                <dt>질량</dt>
+                                <dd>6.417 x 10²³ kg</dd>
+                                <dt>궤도 장반경</dt>
+                                <dd>2.279 x 10⁸ km (1.524 AU)</dd>
+                                <dt>궤도 경사각</dt>
+                                <dd>1.85° (황도면에 대해)</dd>
+                                <dt>공전 주기</dt>
+                                <dd>687 지구일 (1.88 지구년)</dd>
+                                <dt>자전 주기</dt>
+                                <dd>24시간 37분 22초 (1.026 지구일)</dd>
+                                <dt>자전축 기울기</dt>
+                                <dd>25.19°</dd>
+                                <dt>평균 온도</dt>
+                                <dd>-63 °C (최저 -140 °C, 최고 20 °C)</dd>
+                                <dt>겉보기 등급</dt>
+                                <dd>-2.94 (최대 밝기)</dd>
+                                <dt>중력 (표면)</dt>
+                                <dd>3.721 m/s² (0.379 g)</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="cardPlanetDescription">
+                        <h3>행성 설명</h3>
+                        <p>화성은 태양계의 네 번째 행성으로, 붉은색을 띠어 '붉은 행성'으로도 불립니다. 얇은 대기를 가지고 있으며, 극지방에는 얼음과 드라이아이스로 된 극관이 존재합니다.
+                            과거에 물이 흘렀던
+                            흔적들이 발견되어 생명체의 존재 가능성에 대한 탐사가 활발히 이루어지고 있습니다. 표면에는 거대한 협곡과 화산, 크고 작은 운석 충돌 자국이 많으며, 계절 변화도
+                            뚜렷하게 나타납니다.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div id="section2"><br></div>
+                <div class="card">
+                    <div class="cardTitle">
+                        <h2>달 (Moon)</h2>
+                    </div>
+                    <div class="cardContainer">
+                        <div class="planetImg">
+                            <img src="./img/moon투명.png" alt="화성 이미지">
+                        </div>
+                        <div class="cardPlanetInfo">
+                            <h3>상세 정보</h3>
+                            <dl class="infoList">
+                                <dt>이름</dt>
+                                <dd>달</dd>
+                                <dt>적도 지름</dt>
+                                <dd>3,474.2 km</dd>
+                                <dt>둘레 (적도 기준)</dt>
+                                <dd>10,917 km</dd>
+                                <dt>질량</dt>
+                                <dd>7.342 x 10²² kg</dd>
+                                <dt>궤도 장반경</dt>
+                                <dd>384,400 km (평균 거리)</dd>
+                                <dt>궤도 경사각</dt>
+                                <dd>5.145° (지구 공전 궤도면에 대해)</dd>
+                                <dt>공전 주기 (항성 주기)</dt>
+                                <dd>27.32 지구일</dd>
+                                <dt>자전 주기</dt>
+                                <dd>27.32 지구일 (지구와 동주기 자전)</dd>
+                                <dt>자전축 기울기</dt>
+                                <dd>6.68° (자신의 궤도면에 대해) / 1.54° (황도면에 대해)</dd>
+                                <dt>평균 온도</dt>
+                                <dd>-20 °C (낮 최고 127 °C, 밤 최저 -173 °C)</dd>
+                                <dt>겉보기 등급</dt>
+                                <dd>-12.74 (보름달 기준)</dd>
+                                <dt>중력 (표면)</dt>
+                                <dd>1.62 m/s² (0.165 g)</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="cardPlanetDescription">
+                        <h3>행성 설명</h3>
+                        <p>달은 지구의 유일한 자연 위성으로, 지구와 동주기 자전(자전 주기와 공전 주기가 같음)을 하여 항상 같은 면을 지구로 향하고 있습니다. 표면은 수많은 운석 충돌로 인해
+                            생긴 크레이터와
+                            어두운 현무암 평원(바다), 밝은 고지대로 이루어져 있습니다. 달에는 대기가 거의 없어 기상 현상이 없고, 온도 변화가 극심하며, 지구의 조석 현상에 큰 영향을
+                            미칩니다. 인류가 처음으로
+                            발자취를 남긴 천체이기도 합니다.</p>
+                    </div>
+                </div>
+
+
+                <div id="section3"><br></div>
+                <div class="card">
+                    <div class="cardTitle">
+                        <h2>목성 (Jupiter)</h2>
+                    </div>
+                    <div class="cardContainer">
+                        <div class="planetImg">
+                            <img src="./img/jupiter투명.png" alt="화성 이미지">
+                        </div>
+                        <div class="cardPlanetInfo">
+                            <h3>상세 정보</h3>
+                            <dl class="infoList">
+                                <dt>이름</dt>
+                                <dd>목성</dd>
+                                <dt>극 지름</dt>
+                                <dd>133,708 km</dd>
+                                <dt>둘레 (적도 기준)</dt>
+                                <dd>449,197 km</dd>
+                                <dt>질량</dt>
+                                <dd>1.898 x 10²⁷ kg (지구 질량의 318배)</dd>
+                                <dt>궤도 장반경</dt>
+                                <dd>7.785 x 10⁸ km (5.204 AU)</dd>
+                                <dt>궤도 경사각</dt>
+                                <dd>0.0489</dd>
+                                <dt>공전 주기</dt>
+                                <dd>4,332.6 지구일 (11.86 지구년)</dd>
+                                <dt>자전 주기</dt>
+                                <dd>9시간 55분 30초 (0.4135 지구일, 대기층 평균)</dd>
+                                <dt>자전축 기울기</dt>
+                                <dd>3.13°</dd>
+                                <dt>평균 온도 (1기압 기준)</dt>
+                                <dd>-145 °C</dd>
+                                <dt>겉보기 등급</dt>
+                                <dd>-2.94 (최대 밝기)</dd>
+                                <dt>중력 (1기압 기준)</dt>
+                                <dd>24.79 m/s² (2.528 g)</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="cardPlanetDescription">
+                        <h3>행성 설명</h3>
+                        <p>목성은 태양계에서 가장 큰 행성으로, 주로 수소와 헬륨으로 이루어진 거대한 가스 행성입니다. 뚜렷한 줄무늬와 대적점(Great Red Spot)이라는 거대한 폭풍이
+                            특징이며, 이는
+                            지구보다도 큰 규모를 자랑합니다. 태양계에서 가장 강력한 자기장을 가지고 있으며, 95개 이상의 위성을 거느리고 있습니다. 그 중 갈릴레이 위성이라 불리는 이오,
+                            유로파, 가니메데,
+                            칼리스토는 크고 특징적인 위성들입니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
+
+        <section>
+            <div id="gallery">
+                <h1>이미지 갤러리</h1>
+                <img id="galleryMainImage" src="./img/9.webp" alt="메인 이미지">
+                <div id="thumbnail">
+                    <img src="./img/left.png" id="move_left" alt="왼쪽 화살표">
+                    <ul>
+                        <li><img src="./img/장미성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/9.webp" alt="썸네일 1"></li>
+                        <li><img src="./img/m27.jfif" alt="썸네일 2"></li>
+                        <li><img src="./img/장미성운2.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/장미성운3.png" alt="썸네일 8"></li>
+                        <li><img src="./img/버블성운1.jfif" alt="썸네일 3"></li>
+                        <li><img src="./img/북아메리카성운.jfif" alt="썸네일 4"></li>
+                        <li><img src="./img/영혼 성운.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/베일성운.png" alt="썸네일 5"></li>
+                        <li><img src="./img/베일성운2.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/고리성운.jfif" alt="썸네일 5"></li>
+                        <li><img src="./img/돌고래성운.jfif" alt="썸네일 6"></li>
+                        <li><img src="./img/m13.png" alt="썸네일 7"></li>
+                        <li><img src="./img/m104.png" alt="썸네일 8"></li>
+                        <li><img src="./img/ngc7293.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/마귀할멈성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/장미성운4.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/코끼리성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/팩맨성운.jfif" alt="썸네일 8"></li>
+                        <li><img src="./img/하트성운.jfif" alt="썸네일 8"></li>
+
+                    </ul>
+                    <img src="./img/right.png" id="move_right" alt="오른쪽 화살표">
+                </div>
+            </div>
+    </main>
+
+    <footer>
+        <article id="address">
+            <ul id="footer_menu">
+                <li>개인정보 취급 방침 | 이용안내 | 이메일 무단 수집 거부</li>
+                <li>상호 : 밤하늘 여행 | 대표 : gammapasta | 등록번호 : 123-45-67890</li>
+            </ul>
+            <ul id="company_info">
+                <li>밤하늘 여행 유한회사</li>
+                <li>대표이사: gammapasta</li>
+                <li>주소: 태양계 지구 위성 A23-s521</li>
+                <li>이미지 출처: <a
+                        href="https://github.com/gammapasta/gammapasta.github.io/blob/main/image_source.txt">link</a>
+                </li>
+                <li id="copyright">
+                    <p>Copyright © <span id="currentYear"></span> gammapasta. Licensed under the <a
+                            href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT
+                            License</a>.</p>
+                </li>
+                <li></li>
+            </ul>
+        </article>
+        <article id="link">
+            <h3>고객센터 159-9912-9-3332</h3>
+            <select>
+                <option>네이버</option>
+                <option>구글</option>
+            </select>
+            <div id="icons">
+                <img src="./img/facebook.png">
+                <img src="./img/insta.png">
+                <img src="./img/t.png">
+            </div>
+        </article>
+    </footer>
+    <div class="clear"></div>
+
+    <script>
+        const lat = 37.5;
+        const lon = 126.92;
+        const APIKey = "0952033224f9ff288c51e18bc55e96ab";
+
+        const btn = document.querySelector("#weatherButton");
+        const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+
+
+        const tempC = document.getElementById('tempC');
+        const weatherDescription = document.getElementById("weatherDescription");
+        const cloudiness = document.getElementById("cloudiness");
+        const humidity = document.getElementById("humidity");
+        const windSpeed = document.getElementById("windSpeed");
+        const visibilityKm = document.getElementById("visibilityKm");
+        const rain1h = document.getElementById("rain1h");
+        const sunrise = document.getElementById("sunrise");
+        const sunset = document.getElementById("sunset");
+
+
+        let kelvinToCelsius = (k) => (k - 273.15).toFixed(1);
+
+
+
+
+
+        async function getWeather(url) {
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const newTempC = kelvinToCelsius(data.main.temp);
+                const newWeatherDescription = data.weather[0].description;
+                const newCloudiness = data.clouds.all;
+                const newHumidity = data.main.humidity;
+                const newWindSpeed = data.wind.speed.toFixed(1);
+                const newVisibilityKm = (data.visibility / 1000).toFixed(0);
+                const newRain1h = data.rain ? data.rain['1h'] : 0;
+                const newSunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+                const newSunset = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+
+
+                tempC.innerText = `${newTempC}°C`;
+                weatherDescription.innerText = `${newWeatherDescription}`;
+                cloudiness.innerText = `${newCloudiness}%`;
+                humidity.innerText = `${newHumidity}%`;
+                windSpeed.innerText = `${newWindSpeed} m/s`;
+                visibilityKm.innerText = `${newVisibilityKm} km`;
+                rain1h.innerText = `${newRain1h} mm`;
+                sunrise.innerText = `${newSunrise}`;
+                sunset.innerText = `${newSunset}`;
+
+
+            } catch (e) {
+                console.log(e);
+
+            }
+        }
+
+
+        btn.addEventListener("click", () => {
+            getWeather(weatherApi);
+
+        });
+    </script>
+
+</body>
+
+</html>

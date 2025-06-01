@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>갤러리</title>
+  <link rel="stylesheet" href="./gallery.css">
+  <link rel="stylesheet" href="./header.css">
+  <link rel="stylesheet" href="./footer.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      background-color: #f6f6f6;
+
+    }
+
+
+    .main-content {
+      width: 100%;
+      height: auto;
+      text-align: center;
+      margin-top: 70px;
+    }
+
+    .main-content h1 {
+      color: #333;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: solid 1px #ababab;
+    }
+
+    .galleryThumbnail {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 0 auto;
+    }
+
+    .thumbnail {
+      width: 180px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 80%;
+      margin: 60px auto;
+      display: block;
+    }
+
+
+
+    .close,
+    .prev,
+    .next {
+      position: absolute;
+      top: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .close {
+      right: 30px;
+    }
+
+    .prev {
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .next {
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+
+    @media screen and (max-width: 900px) {
+
+
+      .main-content {
+        padding: 30px 20px;
+        height: auto;
+        margin-top: 220px;
+      }
+
+
+
+      .thumbnail {
+        width: 140px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out;
+      }
+
+      .topNav {
+        position: absolute;
+        background-color: white;
+        padding: 15px 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+
+        display: flex;
+
+        align-items: center;
+
+        box-sizing: border-box;
+        flex-direction: column;
+        padding: 10px 20px;
+      }
+
+      .topNav h1 {
+        /* h1을 모바일 헤더의 중앙에 배치 */
+        position: static;
+        /* relative/absolute 설정 해제 */
+        margin: 0 auto 10px auto;
+        /* 좌우 마진 auto로 가운데 정렬, 하단에 10px 여백 */
+        text-align: center;
+        /* 텍스트 정렬 */
+        width: 100%;
+        /* 너비 100%로 설정하여 margin:auto가 제대로 작동하도록 함 */
+      }
+
+
+      .topNav nav ul {
+        /* 데스크탑에서 상속되는 absolute positioning 재정의 */
+        position: static;
+        /* absolute 설정을 해제하여 플렉스 흐름에 따르도록 함 */
+        left: auto;
+        /* 기존 left 값 초기화 */
+        top: auto;
+        /* 기존 top 값 초기화 */
+        transform: none;
+        /* transform 값 초기화 */
+        width: 100%;
+        text-align: center;
+      }
+
+
+
+      .topNav nav ul li {
+        margin: 0 5px;
+        display: block;
+      }
+
+      .topNav nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 5px 10px;
+
+      }
+
+
+
+    }
+  </style>
+</head>
+
+<body>
+    <header class="topNav">
+        <h1><a href="./index.html"><img src="./img/밤하늘여행로고.png" alt=""밤하늘여행로고></a></h1>
+        <div id="nav">
+            <nav>
+                <ul>
+                    <li><a href="./section1.html">오늘의 밤하늘</a></li>
+                    <li><a href="./section2.html">행성과 함께</a></li>
+                    <li><a href="./section3.html">딥스카이 탐험</a></li>
+                    <li><a href="./section4.html">관측 길라잡이</a></li>
+                    <li><a href="./section5.html">갤러리</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+  <main class="main-content">
+    <h1>갤러리</h1>
+    <section class="galleryThumbnail">
+
+      <img src="./img/m27.jfif" class="thumbnail" onclick="openModal(0)" loading="lazy">
+      <img src="./img/영혼 성운.jfif" class="thumbnail" onclick="openModal(1)" loading="lazy">
+      <img src="./img/m104.png" class="thumbnail" onclick="openModal(2)" loading="lazy">
+      <img src="./img/ngc7293.jfif" class="thumbnail" onclick="openModal(3)" loading="lazy">
+      <img src="./img/sun.jpg" class="thumbnail" onclick="openModal(4)" loading="lazy">
+      <img src="./img/고리성운.jfif" class="thumbnail" onclick="openModal(5)" loading="lazy">
+      <img src="./img/돌고래성운.jfif" class="thumbnail" onclick="openModal(6)" loading="lazy">
+      <img src="./img/마귀할멈성운.jfif" class="thumbnail" onclick="openModal(7)" loading="lazy">
+      <img src="./img/버블성운1.jfif" class="thumbnail" onclick="openModal(8)" loading="lazy">
+      <img src="./img/베일성운.png" class="thumbnail" onclick="openModal(9)" loading="lazy">
+      <img src="./img/베일성운2.jfif" class="thumbnail" onclick="openModal(10)" loading="lazy">
+      <img src="./img/북아메리카성운.jfif" class="thumbnail" onclick="openModal(11)" loading="lazy">
+      <img src="./img/m13.png" class="thumbnail" onclick="openModal(12)" loading="lazy">
+      <img src="./img/장미성운.jfif" class="thumbnail" onclick="openModal(13)" loading="lazy">
+      <img src="./img/장미성운2.jfif" class="thumbnail" onclick="openModal(14)" loading="lazy">
+      <img src="./img/장미성운3.png" class="thumbnail" onclick="openModal(15)" loading="lazy">
+      <img src="./img/장미성운4.jfif" class="thumbnail" onclick="openModal(16)" loading="lazy">
+      <img src="./img/코끼리성운.jfif" class="thumbnail" onclick="openModal(17)" loading="lazy">
+      <img src="./img/팩맨성운.jfif" class="thumbnail" onclick="openModal(18)" loading="lazy">
+      <img src="./img/하트성운.jfif" class="thumbnail" onclick="openModal(19)" loading="lazy">
+      <img src="./img/오리온성운.jfif" class="thumbnail" onclick="openModal(20)" loading="lazy">
+      <img src="./img/jupiter투명.png" class="thumbnail" onclick="openModal(21)" loading="lazy">
+      <img src="./img/mar투명.png" class="thumbnail" onclick="openModal(22)" loading="lazy">
+      <img src="./img/moon투명.png" class="thumbnail" onclick="openModal(23)" loading="lazy">
+    </section>
+  </main>
+
+
+
+
+
+
+  <div id="imgModal" class="modal" onclick="closeModal(event)">
+    <span class="close" onclick="closeModal(event)">&times;</span>
+    <span class="prev" onclick="prevImage(event)">&#10094;</span>
+    <span class="next" onclick="nextImage(event)">&#10095;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <footer>
+    <article id="address">
+      <ul id="footer_menu">
+        <li>개인정보 취급 방침 | 이용안내 | 이메일 무단 수집 거부</li>
+        <li>상호 : 밤하늘 여행 | 대표 : gammapasta | 등록번호 : 123-45-67890</li>
+      </ul>
+      <ul id="company_info">
+        <li>밤하늘 여행 유한회사</li>
+        <li>대표이사: gammapasta</li>
+        <li>주소: 태양계 지구 위성 A23-s521</li>
+        <li>이미지 출처: <a href="https://github.com/gammapasta/gammapasta.github.io/blob/main/image_source.txt">link</a></li>
+        <li id="copyright"> <p>Copyright © <span id="currentYear"></span> gammapasta. Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT License</a>.</p></li>
+        <li></li>
+      </ul>
+    </article>
+    <article id="link">
+      <h3>고객센터 159-9912-9-3332</h3>
+      <select>
+        <option>네이버</option>
+        <option>구글</option>
+      </select>
+      <div id="icons">
+        <img src="./img/facebook.png">
+        <img src="./img/insta.png">
+        <img src="./img/t.png">
+      </div>
+    </article>
+  </footer>
+
+  <div class="clear"></div>
+  <script>
+    const images = ['./img/m27.jfif', './img/영혼 성운.jfif', './img/m104.png', './img/ngc7293.jfif', './img/sun.jpg', './img/고리성운.jfif', './img/돌고래성운.jfif', './img/마귀할멈성운.jfif',
+      './img/버블성운1.jfif', './img/베일성운.png', './img/베일성운2.jfif', './img/북아메리카성운.jfif', './img/m13', './img/장미성운.jfif', './img/장미성운2.jfif', './img/장미성운3.png', './img/장미성운4.jfif', './img/코끼리성운.jfif', './img/팩맨성운.jfif',
+      './img/하트성운.jfif', './img/오리온성운.jfif', './img/jupiter투명.png', './img/mar투명.png'];
+    let currentIndex = 0;
+
+    function openModal(index) {
+      currentIndex = index;
+      document.getElementById('modalImage').src = images[currentIndex];
+      document.getElementById('imgModal').style.display = 'block';
+    }
+
+    function closeModal(e) {
+      if (e.target.id === 'imgModal' || e.target.className === 'close') {
+        document.getElementById('imgModal').style.display = 'none';
+      }
+    }
+
+    function nextImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      document.getElementById('modalImage').src = images[currentIndex];
+    }
+
+    function prevImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      document.getElementById('modalImage').src = images[currentIndex];
+    }
+
+    // ESC로 닫기
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") {
+        document.getElementById('imgModal').style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+
+</html>

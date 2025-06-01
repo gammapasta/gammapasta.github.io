@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관측 길라잡이</title>
+    <link rel="stylesheet" href="./gallery.css">
+    <link rel="stylesheet" href="./header.css">
+    <link rel="stylesheet" href="./footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main-content {
+            width: 100%;
+            height: auto;
+            margin-top: 70px;
+        }
+
+        .row {
+            background-color: white;
+        }
+
+        .topcolumn {
+            float: left;
+            width: 100%;
+        }
+
+        .leftcolumn {
+            float: left;
+            width: 50%;
+
+        }
+
+        .rightcolumn {
+            float: left;
+            width: 50%;
+
+
+        }
+
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 25px;
+            box-shadow: 3px 3px 16px 4px rgba(0, 0, 0, 0.16);
+            border: solid 1px rgb(228, 228, 228);
+
+        }
+
+        .card .cardTitle {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .card h2 {
+            color: #355574;
+            font-size: 2.2em;
+            margin: 0;
+        }
+
+        .card .description {
+            margin-top: 15px;
+            padding: 18px 18px 18px 18px;
+            background-color: #f4f4f4;
+            border-radius: 20px;
+        }
+
+        #cardMainImg img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .leftcolumn .card h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin: 0px 0px 20px 0;
+        }
+
+        .leftcolumn .card h3 {
+            font-size: 1.8em;
+            margin: 5px 0px 5px 0;
+
+        }
+
+        .leftcolumn .card h4 {
+            margin-top: 10px;
+        }
+
+        .leftcolumn {
+            color: rgb(120, 120, 120);
+        }
+
+        .rightcolumn .card h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin: 0px 0px 20px 0;
+        }
+
+        .rightcolumn .card h3 {
+            font-size: 1.8em;
+            margin: 5px 0px 5px 0;
+
+        }
+
+        .rightcolumn .card h4 {
+            margin-top: 10px;
+        }
+
+        .rightcolumn {
+            color: rgb(120, 120, 120);
+        }
+
+        .weatherDisplay {
+            padding: 5px 10px 10px 20px;
+        }
+
+        .weatherDisplay input {
+            margin-bottom: 10px;
+        }
+
+
+        .cardPlanetInfo,
+        .cardPlanetDescription {
+            padding: 0 20px 0 20px;
+        }
+
+
+        .cardPlanetInfo h3,
+        .cardPlanetDescription h3 {
+            color: #1e79b7;
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-left: 4px solid #16537b;
+            padding-left: 10px;
+        }
+
+        .infoList {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 50px;
+            margin: 0;
+            padding: 20px 0 0 0;
+        }
+
+        .infoList dt {
+            font-weight: bold;
+            color: #555;
+            text-align: right;
+            padding-right: 5px;
+
+        }
+
+        .infoList dd {
+            margin: 0;
+            color: #737373;
+            word-break: break-word;
+
+        }
+
+        .cardPlanetInfo p {
+            padding-top: 40px;
+            color: #272727;
+        }
+
+        /* 모바일 반응형 */
+        @media screen and (max-width: 900px) {
+
+            .cardPlanetInfo,
+            .cardPlanetDescription {
+                width: 100%;
+                padding: 0 10px 0 10px;
+            }
+
+            .infoList {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 10px 10px;
+                margin: 0;
+                padding: 0;
+            }
+
+            .infoList dt {
+                text-align: left;
+            }
+
+            .leftcolumn,
+            .rightcolumn,
+            .topcolumn {
+                width: 100%;
+                padding: 0;
+            }
+
+            .topNav {
+                position: absolute;
+                background-color: white;
+                padding: 15px 30px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+
+                display: flex;
+
+                align-items: center;
+
+                box-sizing: border-box;
+                flex-direction: column;
+                padding: 10px 20px;
+            }
+
+            .topNav h1 {
+                /* h1을 모바일 헤더의 중앙에 배치 */
+                position: static;
+                /* relative/absolute 설정 해제 */
+                margin: 0 auto 10px auto;
+                /* 좌우 마진 auto로 가운데 정렬, 하단에 10px 여백 */
+                text-align: center;
+                /* 텍스트 정렬 */
+                width: 100%;
+                /* 너비 100%로 설정하여 margin:auto가 제대로 작동하도록 함 */
+            }
+
+
+            .topNav nav ul {
+                /* 데스크탑에서 상속되는 absolute positioning 재정의 */
+                position: static;
+                /* absolute 설정을 해제하여 플렉스 흐름에 따르도록 함 */
+                left: auto;
+                /* 기존 left 값 초기화 */
+                top: auto;
+                /* 기존 top 값 초기화 */
+                transform: none;
+                /* transform 값 초기화 */
+                width: 100%;
+                text-align: center;
+            }
+
+
+
+            .topNav nav ul li {
+                margin: 0 5px;
+                display: block;
+            }
+
+            .topNav nav ul li a {
+                display: block;
+                text-align: center;
+                padding: 5px 10px;
+
+            }
+
+
+            .main-content {
+                padding: 30px 20px;
+                height: auto;
+                margin-top: 220px;
+            }
+
+
+
+            #mainImg {
+                width: 100%;
+                height: 870px;
+
+
+                display: block;
+            }
+
+            #mainImg ul {
+                padding-top: 20px;
+                list-style: none;
+                display: block;
+
+
+            }
+
+            #mainImg ul li {
+                margin: 0 10px;
+                text-align: center;
+
+            }
+
+            #mainImg ul li img {
+
+                display: inline-block;
+
+            }
+
+            .card {
+                width: 100%;
+                height: auto;
+                margin: 15px auto;
+                padding: 15px;
+            }
+
+            .cardImg {
+                /* width: 100%; (이미 cardImg에 100% 설정되어 있으므로 변경 없음) */
+                height: 250px;
+                /* 모바일에서 이미지 높이 줄이기 */
+            }
+
+
+            .cardDescription {
+                font-size: 0.9em;
+                /* 모바일에서 텍스트 크기 줄이기 */
+                padding: 0 10px 10px;
+            }
+
+            #gallery h1 {
+                text-align: center;
+                margin: 60px 0 20px 0;
+            }
+
+            #galleryMainImage {
+                padding: 0 24px 0 24px;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                box-sizing: border-box;
+            }
+
+            #thumbnail ul img {
+                width: 50px;
+                height: 50px;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topNav">
+        <h1><a href="./index.html"><img src="./img/밤하늘여행로고.png" alt=""밤하늘여행로고></a></h1>
+        <div id="nav">
+            <nav>
+                <ul>
+                    <li><a href="./section1.html">오늘의 밤하늘</a></li>
+                    <li><a href="./section2.html">행성과 함께</a></li>
+                    <li><a href="./section3.html">딥스카이 탐험</a></li>
+                    <li><a href="./section4.html">관측 길라잡이</a></li>
+                    <li><a href="./section5.html">갤러리</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="clear"></div>
+    <main class="main-content">
+
+        <div class="row">
+            <div class="topcolumn">
+                <div class="card">
+                    <div class="cardTitle">
+                        <h2>관측 길라잡이</h2>
+                    </div>
+                    <div class="description">
+                        <h2>망원경 종류</h2>
+                        <p>
+                            천체 관측에 사용되는 망원경은 크게 굴절망원경, 반사망원경, 그리고 복합망원경으로 나뉩니다.<br><br>
+
+                            <b>굴절망원경</b>: 렌즈를 사용하여 빛을 모으며, 구조가 간단하고 유지보수가 쉬워 초보자에게 적합합니다. 다만 가격이 높고 무게가 무거워요.<br><br>
+
+                            <b>반사망원경</b>: 거울을 이용해 빛을 반사시켜 상을 맺는 방식으로, 가격 대비 성능이 좋아습니다. 단, 망원경 정렬(콜리메이션)이 필수입니다.
+                            <br><br>
+
+                            <b>복합망원경(카세그레인 등)</b>: 렌즈와 거울을 함께 사용해 작은 부피로 높은 성능의 망원경입니다. 휴대성과 성능의 균형을 원할 때 좋은 선택입니다. 하지만
+                            상이 어둡습니다.
+                        </p>
+                        <br><br>
+                        <h2>망원경 선택 방법</h2>
+                        <p>
+                            망원경을 선택할 때는 예산, 휴대성, 등을 고려해야 합니다.<br><br>
+
+                            - <b>입문자</b>: 굴절망원경이나 작은 반사망원경<br>
+                            - <b>행성이나 달 관측</b>: 대구경 굴절망원경. 선명하게 보입니다.<br>
+                            - <b>딥스카이 천체(성운, 은하 등)</b>: 대구경 반사망원경. 더 많은 빛을 모아 밝게 보입니다.<br><br>
+                        </p>
+
+                    </div>
+                </div>
+
+
+
+                <div class="leftcolumn">
+                    <div class="card">
+                        <h2>Askar Fra 400</h2>
+                        <div id="cardMainImg">
+                            <img src="./img/fra400.png">
+                        </div>
+                        <div class="description">
+                            <div class="cardPlanetInfo">
+                                <h3>상세 정보</h3>
+                                <dl class="infoList">
+                                    <dt>이름</dt>
+                                    <dd>Askar Fra 400</dd>
+                                    <dt>제조사</dt>
+                                    <dd>Sharpstar</dd>
+                                    <dt>망원경 종류</dt>
+                                    <dd>APO 굴절 망원경</dd>
+                                    <dt>구경</dt>
+                                    <dd>72mm</dd>
+                                    <dt>초점거리</dt>
+                                    <dd>400mm</dd>
+                                    <dt>초점비</dt>
+                                    <dd>F5.6</dd>
+                                    <dt>렌즈구성</dt>
+                                    <dd>5매, ED렌즈 2개</dd>
+                                    <dt>무게</dt>
+                                    <dd>2.56kg</dd>
+                                    <dt>가격</dt>
+                                    <dd>1,678,600원</dd>
+
+                                </dl>
+                                <p>FRA는 "Flat-field Refractive Astrograph(평면 굴절 천체 사진기)"의 약자로, 평면 시야 보정 기능이 내장된 굴절
+                                    장비입니다. FRA는 육안 관측에도 적용할 수 있습니다. FRA 시리즈는 현재 천문학 시장에서 몇 안 되는 다재다능하고 우수한 품질의 천체 사진 장비
+                                    중 하나입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <h2>TOA-150</h2>
+                        <div id="cardMainImg">
+                            <img src="./img/toa150.jpg">
+                        </div>
+                        <div class="description">
+                            <div class="cardPlanetInfo">
+                                <h3>상세 정보</h3>
+                                <dl class="infoList">
+                                    <dt>이름</dt>
+                                    <dd>TOA-150</dd>
+                                    <dt>제조사</dt>
+                                    <dd>Takahashi</dd>
+                                    <dt>망원경 종류</dt>
+                                    <dd>APO 굴절 망원경</dd>
+                                    <dt>구경</dt>
+                                    <dd>150mm</dd>
+                                    <dt>초점거리</dt>
+                                    <dd>1100mm</dd>
+                                    <dt>초점비</dt>
+                                    <dd>F7.3</dd>
+                                    <dt>렌즈구성</dt>
+                                    <dd>3매, 2매 ED 렌즈</dd>
+                                    <dt>무게</dt>
+                                    <dd>11.5kg</dd>
+                                    <dt>가격</dt>
+                                    <dd>16,000,000원</dd>
+                                </dl>
+                                <p>TOA(Takahashi Ortho-Apochromat)-150은 타카하시의 플래그십 굴절 망원경으로, 탁월한 색수차 보정과 뛰어난 광학 성능을
+                                    자랑합니다. 천체 사진 촬영은 물론 고해상도 시각 관측에도 매우 적합한 고급 장비입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="rightcolumn">
+                    <div class="card">
+                        <h2>Sky-Watcher 10" Dobsonian</h2>
+                        <div id="cardMainImg">
+                            <img src="./img/dob.jpg">
+                        </div>
+                        <div class="description">
+                            <div class="cardPlanetInfo">
+                                <h3>상세 정보</h3>
+                                <dl class="infoList">
+                                    <dt>이름</dt>
+                                    <dd>Sky-Watcher 10" Dobsonian</dd>
+                                    <dt>제조사</dt>
+                                    <dd>Sky-Watcher</dd>
+                                    <dt>망원경 종류</dt>
+                                    <dd>반사 망원경 (도브소니언 마운트)</dd>
+                                    <dt>구경</dt>
+                                    <dd>254mm</dd>
+                                    <dt>초점거리</dt>
+                                    <dd>1200mm</dd>
+                                    <dt>초점비</dt>
+                                    <dd>F4.7</dd>
+                                    <dt>렌즈구성</dt>
+                                    <dd>파라볼릭 반사경</dd>
+                                    <dt>무게</dt>
+                                    <dd>전체 약 25kg</dd>
+                                    <dt>가격</dt>
+                                    <dd>1,400,000원</dd>
+                                </dl>
+                                <p>10인치 스카이워쳐 돕소니언은 넓은 구경으로 깊은 밤하늘의 대상들을 밝고 선명하게 볼 수 있는 최고의 입문용/중급 반사 망원경입니다. 간단한 조작과
+                                    견고한 구조로 많은 천문 애호가들에게 사랑받고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <h2>Celestron 9.25" SCT</h2>
+                        <div id="cardMainImg">
+                            <img src="./img/sct.webp">
+                        </div>
+                        <div class="description">
+                            <div class="cardPlanetInfo">
+                                <h3>상세 정보</h3>
+                                <dl class="infoList">
+                                    <dt>이름</dt>
+                                    <dd>Celestron 9.25" SCT</dd>
+                                    <dt>제조사</dt>
+                                    <dd>Celestron</dd>
+                                    <dt>망원경 종류</dt>
+                                    <dd>슐미트-카세그레인(SCT)</dd>
+                                    <dt>구경</dt>
+                                    <dd>235mm</dd>
+                                    <dt>초점거리</dt>
+                                    <dd>2350mm</dd>
+                                    <dt>초점비</dt>
+                                    <dd>F10</dd>
+                                    <dt>렌즈구성</dt>
+                                    <dd>SCT 광학계</dd>
+                                    <dt>무게</dt>
+                                    <dd>본체 약 9.1kg</dd>
+                                    <dt>가격</dt>
+                                    <dd>2,990,000원</dd>
+                                </dl>
+                                <p>셀레스트론의 9.25인치 SCT는 휴대성과 광학 성능의 균형이 뛰어난 슐미트-카세그레인 망원경입니다. 천체 촬영과 시각 관측 모두에 적합하며, 고배율의
+                                    행성 관측에 특히 강점을 보입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+            <div class="clear"></div>
+
+    </main>
+
+    <footer>
+        <article id="address">
+            <ul id="footer_menu">
+                <li>개인정보 취급 방침 | 이용안내 | 이메일 무단 수집 거부</li>
+                <li>상호 : 밤하늘 여행 | 대표 : gammapasta | 등록번호 : 123-45-67890</li>
+            </ul>
+            <ul id="company_info">
+                <li>밤하늘 여행 유한회사</li>
+                <li>대표이사: gammapasta</li>
+                <li>주소: 태양계 지구 위성 A23-s521</li>
+                <li>이미지 출처: <a
+                        href="https://github.com/gammapasta/gammapasta.github.io/blob/main/image_source.txt">link</a>
+                </li>
+                <li id="copyright">
+                    <p>Copyright © <span id="currentYear"></span> gammapasta. Licensed under the <a
+                            href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT
+                            License</a>.</p>
+                </li>
+                <li></li>
+            </ul>
+        </article>
+        <article id="link">
+            <h3>고객센터 159-9912-9-3332</h3>
+            <select>
+                <option>네이버</option>
+                <option>구글</option>
+            </select>
+            <div id="icons">
+                <img src="./img/facebook.png">
+                <img src="./img/insta.png">
+                <img src="./img/t.png">
+            </div>
+        </article>
+    </footer>
+    <div class="clear"></div>
+
+
+</body>
+
+</html>

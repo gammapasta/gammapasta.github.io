@@ -1,0 +1,52 @@
+        .topNav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+
+            display: flex;
+
+            align-items: center;
+
+
+            box-sizing: border-box;
+        }
+
+        .topNav h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            margin-right: auto;
+
+        }
+        .topNav nav ul {
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translateX(-50%);
+            gap: 20px;
+            width: 500px;
+
+        }
+
+        .topNav nav ul li {
+            display: inline;
+            margin-left: 10px;
+        }
+
+        .topNav nav ul li a {
+            display: inline;
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s ease;
+
+        }
+
+        .topNav nav ul li a:hover {
+            color: #007bff;
+        }
