@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="./footer.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/webfontworld/kopus@latest/KoPubDotum.css">
     <style>
-
         * {
             margin: 0;
             padding: 0;
-            
+
 
         }
 
@@ -58,7 +57,7 @@
             top: 35%;
             left: 60%;
             width: 400px;
-            font-family:"KoPubDotum";
+            font-family: "KoPubDotum";
 
         }
 
@@ -107,19 +106,7 @@
 
         }
 
-        #mainImg {
-            background-image: radial-gradient(circle at 60% 300%, #016563, #055f5b, #074a62, #082e4e, #021126, #030A20);
-            background-color: #031227;
 
-            width: 100%;
-            height: 400px;
-
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-        }
 
         #mainImg ul {
             list-style: none;
@@ -193,11 +180,119 @@
             object-fit: cover;
             object-position: center;
         }
-        #gallery{
+
+        #gallery {
             border-radius: 8px;
         }
 
+
+        .menuSection {
+            padding: 20px;
+            background-image: radial-gradient(circle at 60% 300%, #016563, #055f5b, #074a62, #082e4e, #021126, #030A20);
+            background-color: #031227;
+            width: 100%;
+            height: 35vh;
+                border-radius: 20px;
+            color: #e0e0e0;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+
+            margin: 0;
+       
+            box-sizing: border-box;
+        }
+
+        .capsule {
+            width: 138px;
+            background-color: #082032;
+            backdrop-filter: blur(8px);
+            border-radius: 80px;
+            box-shadow: 0 0 12px rgba(2, 81, 80, 0.4);
+
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .capsule:hover {
+            transform: translateY(-8px) scale(1.05);
+            background-color: rgba(15, 70, 90, 0.45);
+            border-color: rgba(1, 101, 99, 0.9);
+        }
+
+        .rec {
+            width: 110px;
+            height: 90px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+
+        .rec img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .capsuleText {
+            font-size: 1.05em;
+            font-weight: 500;
+            color: #cceeff;
+            max-width: 130px;
+            line-height: 1.35;
+            text-shadow: 0 0 6px rgba(189, 242, 242, 0.6), 0 0 12px rgba(175, 238, 238, 0.4);
+        }
+
         @media (max-width: 900px) {
+
+            
+            .main-content {
+                padding: 30px 18px;
+                margin-top: -15vh;
+                height: auto;
+            }
+            .menuSection {
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-items: center;
+                box-sizing: border-box;
+                height: auto;
+
+                
+
+
+            }
+
+            .capsule {
+                margin: 10px;
+                width: calc(150px / 5 * 3);
+                height: calc(150px / 5 * 3);
+
+                border-radius: 60px;
+                position: relative;
+            }
+
+            .rec {
+                width: calc(130px / 5 * 3);
+                height: calc(100px / 5 * 3);
+            }
+
+            .capsuleText {
+                font-size: .7em;
+                max-width: 80px;
+            }
+
+
             .topNav {
                 position: absolute;
                 background-color: white;
@@ -261,11 +356,6 @@
 
             }
 
-            .main-content {
-                padding:  30px 0;
-                margin-top: -15vh;
-                height: auto;
-            }
 
             svg {
                 height: 600px;
@@ -350,21 +440,13 @@
             fill: #70AD98;
             stroke: none;
         }
-
-
-
-
-
-
-
-
     </style>
 
 </head>
 
 <body>
     <header class="topNav">
-        <h1><a href="./index.html"><img src="./img/밤하늘여행로고.png" alt=""밤하늘여행로고></a></h1>
+        <h1><a href="./index.html"><img src="./img/밤하늘여행로고.png" alt="" 밤하늘여행로고></a></h1>
         <div id="nav">
             <nav>
                 <ul>
@@ -394,16 +476,46 @@
 
 
     <main class="main-content">
-        <section id="menuSection">
-            <div id="mainImg">
-                <ul>
-                    <li><a href="./section1.html"><img src="./img/메뉴테스트.png" alt=""></a></li>
-                    <li><a href="./section2.html"><img src="./img/메뉴테스트.png" alt=""></a></li>
-                    <li><a href="./section3.html"><img src="./img/메뉴테스트.png" alt=""></a></li>
-                    <li><a href="./section4.html"><img src="./img/메뉴테스트.png" alt=""></a></li>
-                    <li><a href="./section5.html"><img src="./img/메뉴테스트.png" alt=""></a></li>
-                </ul>
+        <section class="menuSection">
+            <div class="capsule">
+                <div class="rec">
+                    <a href="./section1.html"><img src="./img/todnightsicon.png" alt=""></a>
+                    
+                </div>
+                <div class="capsuleText">오늘의 밤하늘</div>
             </div>
+
+            <div class="capsule">
+                <div class="rec">
+                    <a href="./section2.html"><img src="./img/moon투명.png" alt=""></a>
+                    
+                </div>
+                <div class="capsuleText">행성과 함께</div>
+            </div>
+
+            <div class="capsule">
+                <div class="rec">
+                    <a href="section3.html"><img src="./img/장미성운2.jfif" alt=""></a>
+                   
+                </div>
+                <div class="capsuleText">딥스카이 탐험</div>
+            </div>
+
+            <div class="capsule">
+                <div class="rec">
+                    <a href="section4.html"><img src="./img/fra400.png" alt=""></a>
+                    
+                </div>
+                <div class="capsuleText">관측 길라잡이</div>
+            </div>
+
+            <div class="capsule">
+                <div class="rec">
+                    <a href="./section5.html"><img src="./img/galleryImage.jpg" alt=""></a>
+                </div>
+                <div class="capsuleText">갤러리</div>
+            </div>
+
         </section>
 
         <article id="todaysObservation">
@@ -425,7 +537,8 @@
                     </div>
                     <div class="cardTitle">서쪽 베일 성운 NGC 6960</div>
                     <div class="cardDescription">
-                        백조자리에서 가장 유명하고 거대한 초신성 잔해 중 하나이다. 지구에서 약 1,470 광년 떨어져 있으며, 약 130 광년의 직경이다. 겉보기 등급이 7등급 미만이므로 맨눈으로 보기 어려우며, 망원경이나 쌍안경으로 관측해야 볼 수 있다.
+                        백조자리에서 가장 유명하고 거대한 초신성 잔해 중 하나이다. 지구에서 약 1,470 광년 떨어져 있으며, 약 130 광년의 직경이다. 겉보기 등급이 7등급 미만이므로
+                        맨눈으로 보기 어려우며, 망원경이나 쌍안경으로 관측해야 볼 수 있다.
                     </div>
                 </div>
                 <div class="card">
@@ -434,7 +547,8 @@
                     </div>
                     <div class="cardTitle">고리 성운 m57</div>
                     <div class="cardDescription">
-                        고리 성운은 거문고자리에 있으며, 지구에서 약 2,300 광년 떨어져 있다. 지금까지 2~30km/s의 속도로 가스를 주변으로 퍼트리고 있다. 4인치 정도의 망원경으로는 다른 별들과 대비되는 희미한 빛구름 형태의 고리모양을 볼 수 있다.
+                        고리 성운은 거문고자리에 있으며, 지구에서 약 2,300 광년 떨어져 있다. 지금까지 2~30km/s의 속도로 가스를 주변으로 퍼트리고 있다. 4인치 정도의 망원경으로는
+                        다른 별들과 대비되는 희미한 빛구름 형태의 고리모양을 볼 수 있다.
                     </div>
                 </div>
             </div>
@@ -477,40 +591,40 @@
         </section>
 
 
-    <footer>
-        <article id="address">
-            <ul id="footer_menu">
-                <li>개인정보 취급 방침 | 이용안내 | 이메일 무단 수집 거부</li>
-                <li>상호 : 밤하늘 여행 | 대표 : gammapasta | 등록번호 : 123-45-67890</li>
-            </ul>
-            <ul id="company_info">
-                <li>밤하늘 여행 유한회사</li>
-                <li>대표이사: gammapasta</li>
-                <li>주소: 태양계 지구 위성 A23-s521</li>
-                <li>이미지 출처: <a
-                        href="https://github.com/gammapasta/gammapasta.github.io/blob/main/image_source.txt">link</a>
-                </li>
-                <li id="copyright">
-                    <p>Copyright © <span id="currentYear"></span> gammapasta. Licensed under the <a
-                            href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT
-                            License</a>.</p>
-                </li>
-                <li></li>
-            </ul>
-        </article>
-        <article id="link">
-            <h3>고객센터 159-9912-9-3332</h3>
-            <select>
-                <option>네이버</option>
-                <option>구글</option>
-            </select>
-            <div id="icons">
-                <img src="./img/facebook.png">
-                <img src="./img/insta.png">
-                <img src="./img/t.png">
-            </div>
-        </article>
-    </footer>
+        <footer>
+            <article id="address">
+                <ul id="footer_menu">
+                    <li>개인정보 취급 방침 | 이용안내 | 이메일 무단 수집 거부</li>
+                    <li>상호 : 밤하늘 여행 | 대표 : gammapasta | 등록번호 : 123-45-67890</li>
+                </ul>
+                <ul id="company_info">
+                    <li>밤하늘 여행 유한회사</li>
+                    <li>대표이사: gammapasta</li>
+                    <li>주소: 태양계 지구 위성 A23-s521</li>
+                    <li>이미지 출처: <a
+                            href="https://github.com/gammapasta/gammapasta.github.io/blob/main/image_source.txt">link</a>
+                    </li>
+                    <li id="copyright">
+                        <p>Copyright © <span id="currentYear"></span> gammapasta. Licensed under the <a
+                                href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT
+                                License</a>.</p>
+                    </li>
+                    <li></li>
+                </ul>
+            </article>
+            <article id="link">
+                <h3>고객센터 159-9912-9-3332</h3>
+                <select>
+                    <option>네이버</option>
+                    <option>구글</option>
+                </select>
+                <div id="icons">
+                    <img src="./img/facebook.png">
+                    <img src="./img/insta.png">
+                    <img src="./img/t.png">
+                </div>
+            </article>
+        </footer>
         <div class="clear"></div>
 
     </main>
