@@ -192,7 +192,7 @@
             background-color: #031227;
             width: 100%;
             height: 35vh;
-                border-radius: 20px;
+            border-radius: 20px;
             color: #e0e0e0;
             font-family: 'Noto Sans KR', sans-serif;
             display: flex;
@@ -201,7 +201,7 @@
             align-items: center;
 
             margin: 0;
-       
+
             box-sizing: border-box;
         }
 
@@ -253,12 +253,13 @@
 
         @media (max-width: 900px) {
 
-            
+
             .main-content {
                 padding: 30px 18px;
                 margin-top: -15vh;
                 height: auto;
             }
+
             .menuSection {
                 list-style: none;
                 display: flex;
@@ -268,7 +269,7 @@
                 box-sizing: border-box;
                 height: auto;
 
-                
+
 
 
             }
@@ -480,7 +481,7 @@
             <div class="capsule">
                 <div class="rec">
                     <a href="./section1.html"><img src="./img/todnightsicon.png" alt=""></a>
-                    
+
                 </div>
                 <div class="capsuleText">오늘의 밤하늘</div>
             </div>
@@ -488,7 +489,7 @@
             <div class="capsule">
                 <div class="rec">
                     <a href="./section2.html"><img src="./img/moon투명.png" alt=""></a>
-                    
+
                 </div>
                 <div class="capsuleText">행성과 함께</div>
             </div>
@@ -496,7 +497,7 @@
             <div class="capsule">
                 <div class="rec">
                     <a href="section3.html"><img src="./img/장미성운2.jfif" alt=""></a>
-                   
+
                 </div>
                 <div class="capsuleText">딥스카이 탐험</div>
             </div>
@@ -504,7 +505,7 @@
             <div class="capsule">
                 <div class="rec">
                     <a href="section4.html"><img src="./img/fra400.png" alt=""></a>
-                    
+
                 </div>
                 <div class="capsuleText">관측 길라잡이</div>
             </div>
@@ -629,136 +630,136 @@
 
     </main>
 
+    <script>
 
+        const heroImages = document.querySelectorAll('.hero-image');
+        const heroTexts = document.querySelectorAll('.hero-text');
+        const heroSection = document.querySelector('.hero-section');
+        const mainContent = document.querySelector('.main-content');
+        const headerHeight = document.querySelector('.topNav').offsetHeight;
+        const overlapAmount = heroSection.offsetHeight * 0.3;
+        const centerX = 150;
+        const centerY = 150;
+
+        const svgContainer = document.getElementById('starSvg');
+        const circles = [];
+        const radiusList = [];
+        const circumferenceList = [];
+        const elementId = [];
+        const starList = [];
+
+        let starNumber = 0;
+        heroSection.style.top = `${headerHeight}px`;
+        heroSection.style.height = `calc(120vh - ${headerHeight}px)`;
+        mainContent.style.marginTop = `-${overlapAmount}px`;
+
+
+
+
+
+        for (let r = 10; r <= 900; r += 4) {
+            let currentCircumference = 2 * Math.PI * r;
+            let startAngle = 0;
+            const trailSize = Math.random() * 2.2 + .3;
+            //박스 내부에 만들기
+            if (r < 220) {
+                angle = Math.random() * 360;
+
+            } else if (r < 350) {
+                angle = 270 + Math.random() * 220;
+            }
+            else {
+                angle = 290 + Math.random() * 110;
+
+            }
+            startAngle = angle;
+            let rotateTransform = `rotate(${startAngle} ${centerX} ${centerY})`;
+
+
+
+
+
+            let starLightX = centerX + r * Math.cos(startAngle * (Math.PI / 180));
+            let starLightY = centerY + r * Math.sin(startAngle * (Math.PI / 180));
+
+            radiusList.push(r);
+            circumferenceList.push(currentCircumference);
+
+            starNumber += 1;
+
+            const circleId = `trail${starNumber}`;
+            const starId = `star${starNumber}`;
+
+
+
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("class", "trail");
+            circle.setAttribute("id", circleId);
+            circle.setAttribute("cx", centerX);
+            circle.setAttribute("cy", centerY);
+            circle.setAttribute("r", r);
+            circle.setAttribute("transform", rotateTransform);
+            svgContainer.appendChild(circle);
+
+            const colors = ['#E2FFFA', '#4C8385', '#43757E', '#0A4553', '#477C85', '#C1E9EC', '#184151', '#98C9D1', '#386671'];
+            const trailColor = colors[Math.floor(Math.random() * colors.length)];
+
+            circle.style.strokeDasharray = currentCircumference; //원 길이
+            circle.style.strokeDashoffset = currentCircumference; //안보이게 하는거
+            circle.style.stroke = `${trailColor}`;
+            circle.style.strokeWidth = trailSize;
+            circle.style.zIndex = 1;
+            circles.push(circle);
+
+            const star = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+            star.setAttribute("class", "star");
+            star.setAttribute("id", starId);
+            star.setAttribute("cx", starLightX)
+            star.setAttribute("cy", starLightY)
+            let starSize = 1
+            if (trailSize < 1) { starSize = 0.2 }
+            star.setAttribute("r", starSize)
+            star.style.zIndex = 1;
+            star.style.fill = `${trailColor}`;
+
+            //별 반짝임
+            const animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+            animate.setAttribute("attributeName", "opacity");
+            let randomBlinking = Math.random();
+            if (randomBlinking > 0.7) {
+                randomBlinking = 0.7;
+            }
+            animate.setAttribute("values", `1;${randomBlinking};1`);
+            animate.setAttribute("dur", "0.5s");
+            animate.setAttribute("repeatCount", "indefinite");
+
+            star.appendChild(animate);
+            svgContainer.appendChild(star)
+
+        }
+        console.log("a", radiusList, circumferenceList, elementId)
+
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY;
+            const scrollHeight = document.body.scrollHeight - window.innerHeight; //문서 전체 높이 - 현재 뷰포트 높이
+            let t = scrollTop / scrollHeight / 3; //스크롤 빠르게 내려도 별은 천천히 보이게
+            const tMax = 0.07
+
+            if (t > tMax) t = tMax; // t가 0.2를 넘으면 아무것도 하지 않음
+
+
+            circles.forEach((currentCircleDomObject, elementIndex) => {
+                const currentCircumference = circumferenceList[elementIndex];
+                const offset = currentCircumference * (1 - t);
+                currentCircleDomObject.style.strokeDashoffset = offset;
+            })
+
+        });
+
+    </script>
+    <script src="./gallery.js"></script>
 </body>
 
-<script>
 
-    const heroImages = document.querySelectorAll('.hero-image');
-    const heroTexts = document.querySelectorAll('.hero-text');
-    const heroSection = document.querySelector('.hero-section');
-    const mainContent = document.querySelector('.main-content');
-    const headerHeight = document.querySelector('.topNav').offsetHeight;
-    const overlapAmount = heroSection.offsetHeight * 0.3;
-    const centerX = 150;
-    const centerY = 150;
-
-    const svgContainer = document.getElementById('starSvg');
-    const circles = [];
-    const radiusList = [];
-    const circumferenceList = [];
-    const elementId = [];
-    const starList = [];
-
-    let starNumber = 0;
-    heroSection.style.top = `${headerHeight}px`;
-    heroSection.style.height = `calc(120vh - ${headerHeight}px)`;
-    mainContent.style.marginTop = `-${overlapAmount}px`;
-
-
-
-
-
-    for (let r = 10; r <= 900; r += 4) {
-        let currentCircumference = 2 * Math.PI * r;
-        let startAngle = 0;
-        const trailSize = Math.random() * 2.2 + .3;
-        //박스 내부에 만들기
-        if (r < 220) {
-            angle = Math.random() * 360;
-
-        } else if (r < 350) {
-            angle = 270 + Math.random() * 220;
-        }
-        else {
-            angle = 290 + Math.random() * 110;
-
-        }
-        startAngle = angle;
-        let rotateTransform = `rotate(${startAngle} ${centerX} ${centerY})`;
-
-
-
-
-
-        let starLightX = centerX + r * Math.cos(startAngle * (Math.PI / 180));
-        let starLightY = centerY + r * Math.sin(startAngle * (Math.PI / 180));
-
-        radiusList.push(r);
-        circumferenceList.push(currentCircumference);
-
-        starNumber += 1;
-
-        const circleId = `trail${starNumber}`;
-        const starId = `star${starNumber}`;
-
-
-
-        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("class", "trail");
-        circle.setAttribute("id", circleId);
-        circle.setAttribute("cx", centerX);
-        circle.setAttribute("cy", centerY);
-        circle.setAttribute("r", r);
-        circle.setAttribute("transform", rotateTransform);
-        svgContainer.appendChild(circle);
-
-        const colors = ['#E2FFFA', '#4C8385', '#43757E', '#0A4553', '#477C85', '#C1E9EC', '#184151', '#98C9D1', '#386671'];
-        const trailColor = colors[Math.floor(Math.random() * colors.length)];
-
-        circle.style.strokeDasharray = currentCircumference; //원 길이
-        circle.style.strokeDashoffset = currentCircumference; //안보이게 하는거
-        circle.style.stroke = `${trailColor}`;
-        circle.style.strokeWidth = trailSize;
-        circle.style.zIndex = 1;
-        circles.push(circle);
-
-        const star = document.createElementNS("http://www.w3.org/2000/svg", "circle")
-        star.setAttribute("class", "star");
-        star.setAttribute("id", starId);
-        star.setAttribute("cx", starLightX)
-        star.setAttribute("cy", starLightY)
-        let starSize = 1
-        if (trailSize < 1) { starSize = 0.2 }
-        star.setAttribute("r", starSize)
-        star.style.zIndex = 1;
-        star.style.fill = `${trailColor}`;
-
-        //별 반짝임
-        const animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
-        animate.setAttribute("attributeName", "opacity");
-        let randomBlinking = Math.random();
-        if (randomBlinking > 0.7) {
-            randomBlinking = 0.7;
-        }
-        animate.setAttribute("values", `1;${randomBlinking};1`);
-        animate.setAttribute("dur", "0.5s");
-        animate.setAttribute("repeatCount", "indefinite");
-
-        star.appendChild(animate);
-        svgContainer.appendChild(star)
-
-    }
-    console.log("a", radiusList, circumferenceList, elementId)
-
-    window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
-        const scrollHeight = document.body.scrollHeight - window.innerHeight; //문서 전체 높이 - 현재 뷰포트 높이
-        let t = scrollTop / scrollHeight / 3; //스크롤 빠르게 내려도 별은 천천히 보이게
-        const tMax = 0.07
-
-        if (t > tMax) t = tMax; // t가 0.2를 넘으면 아무것도 하지 않음
-
-
-        circles.forEach((currentCircleDomObject, elementIndex) => {
-            const currentCircumference = circumferenceList[elementIndex];
-            const offset = currentCircumference * (1 - t);
-            currentCircleDomObject.style.strokeDashoffset = offset;
-        })
-
-    });
-
-</script>
-<script src="./gallery.js"></script>
 
 </html>
